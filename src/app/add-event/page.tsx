@@ -46,9 +46,20 @@ export default function CreateEventPage() {
     setFormData((prev) => ({ ...prev, thumbnailUrl: url }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submitting Event Data: ", formData);
+
+    const res = await fetch("http://localhost:8000/add-event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+    console.log("Server Response: ", data);
   };
 
   return (
@@ -232,7 +243,7 @@ export default function CreateEventPage() {
               Organizer Email attached:
             </span>
             <span className="text-[#0F172A] font-bold tracking-wide">
-              nsara@gmail.com
+              example@gmail.com
             </span>
           </div>
 
