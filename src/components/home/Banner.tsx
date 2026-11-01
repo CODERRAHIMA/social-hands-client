@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const BannerPage = () => {
   return (
-    <section className="relative isolate flex min-h-screen items-center overflow-hidden bg-[#26351f] text-white">
+    <section id="home" className="relative isolate flex min-h-screen items-center overflow-hidden bg-[#26351f] text-white">
       <Image
         src="/bannerImg.jpg"
         alt=""
