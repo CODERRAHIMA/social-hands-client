@@ -47,7 +47,7 @@ const Navbar = () => {
 
         {/* Upcoming Events */}
         <Link
-          href="/events"
+          href="/upcoming-events"
           className="hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#42512C]/80 transition-colors outline-none hover:bg-[#42512C]/10 hover:text-[#1C2012] focus-visible:ring-3 focus-visible:ring-[#647F52]/40 md:flex"
         >
           <CalendarDays aria-hidden="true" size={19} />
