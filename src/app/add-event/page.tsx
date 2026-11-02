@@ -16,10 +16,10 @@ import {
 
 const formProps = {
     title: "",
-    type: "Donation",
-    date: "",
+    eventType: "Donation",
+    eventDate: "",
     location: "",
-    thumbnailUrl: "",
+    image: "",
     description: "",
 };
 
@@ -27,10 +27,10 @@ export default function CreateEventPage() {
   const [formData, setFormData] = useState(formProps);
 
   const presets = [
-    { name: "Winter Clothes", url: "https://unsplash.com" },
-    { name: "Blanket Relief", url: "https://unsplash.com" },
-    { name: "Cleanup", url: "https://unsplash.com" },
-    { name: "Tree Plantation", url: "https://unsplash.com" },
+    { name: "Winter Clothes", url: "https://plus.unsplash.com/premium_photo-1661907706957-88832c243d2f?w=600" },
+    { name: "Blanket Relief", url: "https://plus.unsplash.com/premium_photo-1683135012485-412ba9531a3b?w=600" },
+    { name: "Cleanup", url: "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=600" },
+    { name: "Tree Plantation", url: "https://plus.unsplash.com/premium_photo-1681140560806-928e8b9a9a20?w=600" },
   ];
 
   const handleInputChange = (
@@ -43,7 +43,7 @@ export default function CreateEventPage() {
   };
 
   const applyPreset = (url: string) => {
-    setFormData((prev) => ({ ...prev, thumbnailUrl: url }));
+    setFormData((prev) => ({ ...prev, image: url }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -122,15 +122,18 @@ export default function CreateEventPage() {
               <div className="relative">
                 <Tag className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
                 <select
-                  name="type"
-                  value={formData.type}
+                  name="eventType"
+                  value={formData.eventType}
                   onChange={handleInputChange}
                   className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-10 py-3 text-sm text-[#0F172A] appearance-none focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all cursor-pointer"
                 >
                   <option value="Donation">Donation</option>
                   <option value="Cleanup">Cleanup</option>
                   <option value="Plantation">Plantation</option>
-                  <option value="Medical Camp">Medical Camp</option>
+                  <option value="Winter Relief">Winter Relief</option>
+                  <option value="Food Drive">Food Drive</option>
+                  <option value="Health Camp">Health Camp</option>
+                  <option value="Education">Education</option>
                 </select>
                 <ChevronDown className="absolute right-4 top-4 h-3.5 w-3.5 text-[#94A3B8] pointer-events-none" />
               </div>
@@ -145,8 +148,8 @@ export default function CreateEventPage() {
                 <Calendar className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
                 <input
                   type="date"
-                  name="date"
-                  value={formData.date}
+                  name="eventDate"
+                  value={formData.eventDate}
                   onChange={handleInputChange}
                   required
                   className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all cursor-pointer"
@@ -186,8 +189,8 @@ export default function CreateEventPage() {
               <ImageIcon className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
               <input
                 type="url"
-                name="thumbnailUrl"
-                value={formData.thumbnailUrl}
+                name="image"
+                value={formData.image}
                 onChange={handleInputChange}
                 required
                 placeholder="https://unsplash.com..."

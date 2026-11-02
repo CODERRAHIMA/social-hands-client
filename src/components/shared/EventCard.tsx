@@ -67,7 +67,7 @@ const EventCard = ({ event }: EventCardProps) => {
         {/* Footer */}
         <div className="mt-auto border-t border-gray-100 pt-4">
           <Link
-            href={`/events/${event._id}`}
+            href={`/upcoming-events/${event._id}`}
             className="flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#42512C] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:bg-[#344222] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#647F52]"
           >
             View event
