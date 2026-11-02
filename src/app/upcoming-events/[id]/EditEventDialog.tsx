@@ -53,11 +53,11 @@ export function EditEventDialog({ event }: { event: Event }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedEvent), // Send only the updated fields
+      body: JSON.stringify(updatedEvent), 
     });
 
     const data = await res.json();
-    router.refresh(); // Refresh the page to reflect the updated event
+    router.refresh(); 
   };
   return (
     <Dialog>

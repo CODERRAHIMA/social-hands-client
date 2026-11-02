@@ -20,8 +20,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EditEventDialog } from "./EditEventDialog";
+import { DeleteEventDialog } from "./DeleteEventDialog";
 
 interface Event {
+  _id: string;
   title: string;
   eventType: string;
   eventDate: string;
@@ -55,11 +57,8 @@ const EventDetailPage = ({ event }: EventDetailPageProps) => {
         </Link>
 
         <div className="pb-4 flex gap-2 justify-end">
-            <EditEventDialog event={event} />
-            <Button variant="outline" className="flex-1 sm:flex-none">
-              <Trash size={16} />
-              Delete
-            </Button>
+            <EditEventDialog key={event._id} event={event} />
+            <DeleteEventDialog id={event._id} />
           </div>
 
         {/* Main Card */}
