@@ -1,5 +1,4 @@
 "use client";
-
 import {
   ArrowLeft,
   CalendarDays,
@@ -8,9 +7,6 @@ import {
   Share2,
   Heart,
   ShieldCheck,
-  Pencil,
-  Trash,
-  Edit,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -19,24 +15,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { EditEventDialog } from "./EditEventDialog";
-import { DeleteEventDialog } from "./DeleteEventDialog";
+import { EditEventDialog } from "@/components/event/EditEventDialog";
+import { DeleteEventDialog } from "@/components/event/DeleteEventDialog";
+import { IEvent } from "@/lib/eventType";
 
-interface Event {
-  _id: string;
-  title: string;
-  eventType: string;
-  eventDate: string;
-  location: string;
-  image: string;
-  description: string;
-}
-
-interface EventDetailPageProps {
-  event: Event;
-}
-
-const EventDetailPage = ({ event }: EventDetailPageProps) => {
+const EventDetailPage = ({ event }: { event: IEvent }) => {
   const formattedDate = new Date(event.eventDate).toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",

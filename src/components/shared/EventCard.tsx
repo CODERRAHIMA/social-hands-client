@@ -1,22 +1,9 @@
 import { ArrowRight, CalendarDays, MapPin, Tag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { IEvent } from "@/lib/eventType";
 
-interface Event {
-  _id: string;
-  title: string;
-  eventType: string;
-  eventDate: string;
-  location: string;
-  image: string;
-  description: string;
-}
-
-interface EventCardProps {
-  event: Event;
-}
-
-const EventCard = ({ event }: EventCardProps) => {
+const EventCard = ({ event }: { event: IEvent }) => {
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#E5E9DF] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#42512C]/10">
       {/* Image */}

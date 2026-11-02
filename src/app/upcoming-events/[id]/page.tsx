@@ -1,5 +1,6 @@
+import EventDetailPage from "@/components/event/EventDetail";
 import React from "react";
-import EventDetailPage from "./EventDetail";
+
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;

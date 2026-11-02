@@ -65,10 +65,12 @@ const Navbar = () => {
             <Moon size={20} aria-hidden="true" />
           </Button>
 
-          <Button className="h-10 rounded-full bg-green-700 px-5 font-semibold text-white shadow-md shadow-green-900/20 hover:bg-green-800">
+          <Link href="/sign-in">
+            <Button className="h-10 rounded-full bg-green-700 px-5 font-semibold text-white shadow-md shadow-green-900/20 hover:bg-green-800">
             <LogIn size={18} aria-hidden="true" />
             <span className="hidden sm:inline">Login</span>
           </Button>
+          </Link>
         </div>
       </div>
     </nav>

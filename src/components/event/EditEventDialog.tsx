@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { IEvent } from "@/lib/eventType";
 import {
   Pencil,
   Type,
@@ -22,17 +23,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface Event {
-  _id: string;
-  title: string;
-  eventType: string;
-  eventDate: string;
-  location: string;
-  image: string;
-  description: string;
-}
-
-export function EditEventDialog({ event }: { event: Event }) {
+export function EditEventDialog({ event }: { event: IEvent }) {
   const [formData, setFormData] = useState(event);
   const router = useRouter();
 
@@ -56,7 +47,7 @@ export function EditEventDialog({ event }: { event: Event }) {
       body: JSON.stringify(updatedEvent), 
     });
 
-    const data = await res.json();
+    await res.json();
     router.refresh(); 
   };
   return (

@@ -18,7 +18,7 @@ export function DeleteEventDialog({ id }: { id: string }) {
         const res = await fetch(`http://localhost:8000/upcoming-events/${id}`, {
             method: "DELETE"
         })
-        const data = await res.json();
+        await res.json();
         redirect("/upcoming-events");
     };
 
