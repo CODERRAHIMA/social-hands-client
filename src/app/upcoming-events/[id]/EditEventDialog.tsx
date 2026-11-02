@@ -19,9 +19,11 @@ import {
   FileText,
   ChevronDown,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface Event {
+  _id: string;
   title: string;
   eventType: string;
   eventDate: string;
@@ -32,6 +34,8 @@ interface Event {
 
 export function EditEventDialog({ event }: { event: Event }) {
   const [formData, setFormData] = useState(event);
+  const router = useRouter();
+
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -42,18 +46,18 @@ export function EditEventDialog({ event }: { event: Event }) {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitting Event Data: ", formData);
+    const {_id, ...updatedEvent} = formData; // Exclude _id from the updated data
 
-    const res = await fetch("http://localhost:8000/add-event", {
-      method: "POST",
+    const res = await fetch(`http://localhost:8000/upcoming-events/${event._id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedEvent), // Send only the updated fields
     });
 
     const data = await res.json();
-    console.log("Server Response: ", data);
+    router.refresh(); // Refresh the page to reflect the updated event
   };
   return (
     <Dialog>
@@ -213,7 +217,11 @@ export function EditEventDialog({ event }: { event: Event }) {
                 </Button>
               }
             />
-            <Button type="submit">Save changes</Button>
+            <DialogClose
+              render={
+                <Button type="submit">Save changes</Button>
+              }
+            />
           </DialogFooter>
         </form>
       </DialogContent>
