@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { Sprout } from "lucide-react";
 
 const BannerPage = () => {
   return (
@@ -21,10 +22,7 @@ const BannerPage = () => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-36 sm:px-10 lg:px-12">
         <div className="max-w-3xl">
           <div className="mb-6 inline-flex max-w-full items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold tracking-wide text-white shadow-lg shadow-black/10 backdrop-blur-md sm:text-sm">
-            <span
-              aria-hidden="true"
-              className="h-2 w-2 shrink-0 rounded-full bg-lime-300 shadow-[0_0_10px_rgba(190,242,100,0.8)]"
-            />
+            <Sprout size={16} aria-hidden="true" className="text-lime-200" />
             <span>Community-Driven Social Development Platform</span>
           </div>
 
