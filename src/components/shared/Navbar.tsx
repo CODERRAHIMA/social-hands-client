@@ -31,7 +31,7 @@ import {
 import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
-  
+
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
@@ -102,7 +102,7 @@ const Navbar = () => {
               <PopoverTrigger
                 nativeButton={false}
                 render={
-                  <div className="flex items-center gap-2 rounded-full border border-gray-400/50 p-1.5 pr-3 shadow-sm transition-all duration-200 hover:bg-gray-300/30 hover:border-gray-400/70 hover:shadow-md cursor-pointer group">
+                  <div className="flex items-center gap-3 rounded-full bg-white/70 border border-black/20 p-1.5 pr-3 shadow-sm transition-all duration-200 hover:bg-white hover:border-gray-400/70 hover:shadow-md cursor-pointer group">
                     <div className="relative">
                       <Avatar className="h-8 w-8">
                         <AvatarImage
@@ -114,7 +114,7 @@ const Navbar = () => {
                       <AvatarBadge className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500" />
                     </div>
 
-                    <ChevronDown className="h-4 w-4 text-gray-400 transition-transform duration-200 group-hover:text-gray-600 group-hover:translate-y-0.5" />
+                    <ChevronDown className="h-4 w-4 text-[#42512C] hover:text-[#1C2012] transition-transform duration-200 group-hover:text-gray-600 group-hover:translate-y-0.5" />
                   </div>
                 }
               ></PopoverTrigger>
@@ -137,7 +137,7 @@ const Navbar = () => {
                 {/* Menu Items */}
                 <div className="px-2">
                   <Link
-                    href="/create-event"
+                    href="/add-event"
                     className="flex items-center gap-3 rounded-xl py-2 px-3 text-sm font-medium text-gray-700 transition-colors hover:bg-teal-50 hover:text-teal-600"
                   >
                     <PlusCircle className="h-[18px] w-[18px] text-teal-500" />

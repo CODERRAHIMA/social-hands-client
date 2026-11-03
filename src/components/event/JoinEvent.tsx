@@ -12,6 +12,7 @@ const JoinEvent = ({ event }: { event: IEvent }) => {
     
     const data = {
         username: user?.name,
+        email: user?.email,
         userimage: user?.image,
         ...event
     }
