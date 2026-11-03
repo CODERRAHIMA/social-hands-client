@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EditEventDialog } from "@/components/event/EditEventDialog";
 import { DeleteEventDialog } from "@/components/event/DeleteEventDialog";
 import { IEvent } from "@/lib/eventType";
+import JoinEvent from "./JoinEvent";
 
 const EventDetailPage = ({ event }: { event: IEvent }) => {
   const formattedDate = new Date(event.eventDate).toLocaleDateString("en-US", {
@@ -118,10 +119,7 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
                   <Share2 size={17} />
                 </Button>
 
-                <Button className="flex-1 sm:flex-none bg-teal-600 hover:bg-teal-700">
-                  <Heart size={16} />
-                  Join Event
-                </Button>
+                <JoinEvent event={event} />
               </div>
             </div>
 

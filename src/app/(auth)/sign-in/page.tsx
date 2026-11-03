@@ -44,25 +44,25 @@ export default function SignInPage() {
     }
   }
 
-  async function handleGoogleSignIn() {
-    setErrorMessage("")
-    setPending("google")
+  // async function handleGoogleSignIn() {
+  //   setErrorMessage("")
+  //   setPending("google")
 
-    try {
-      const { error } = await authClient.signIn.social({
-        provider: "google",
-        callbackURL: "/",
-      })
+  //   try {
+  //     const { error } = await authClient.signIn.social({
+  //       provider: "google",
+  //       callbackURL: "/",
+  //     })
 
-      if (error) {
-        setErrorMessage(error.message || "Unable to continue with Google.")
-      }
-    } catch {
-      setErrorMessage("Unable to continue with Google right now. Please try again.")
-    } finally {
-      setPending(null)
-    }
-  }
+  //     if (error) {
+  //       setErrorMessage(error.message || "Unable to continue with Google.")
+  //     }
+  //   } catch {
+  //     setErrorMessage("Unable to continue with Google right now. Please try again.")
+  //   } finally {
+  //     setPending(null)
+  //   }
+  // }
 
   return (
     <section className="relative isolate overflow-hidden bg-[#F9F9F2] px-4 pb-16 pt-28 sm:px-6 sm:pt-32">
@@ -172,7 +172,7 @@ export default function SignInPage() {
               <span className="h-px flex-1 bg-[#E8E9E1]" />
             </div>
 
-            <Button
+            {/* <Button
               type="button"
               variant="outline"
               disabled={pending !== null}
@@ -180,7 +180,7 @@ export default function SignInPage() {
               className="h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2]"
             >
 
-                {/* add google svg */}
+                
               <svg
                 aria-hidden="true"
                 viewBox="0 0 24 24"
@@ -204,7 +204,7 @@ export default function SignInPage() {
                 />
               </svg>
               {pending === "google" ? "Connecting..." : "Continue with Google"}
-            </Button>
+            </Button> */}
 
             <p className="mt-7 text-center text-sm text-[#64695D]">
               New to SocialHands?{" "}
