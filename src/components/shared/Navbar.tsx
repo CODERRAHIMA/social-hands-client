@@ -31,8 +31,8 @@ import {
 import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
+  
   const { data: session } = authClient.useSession();
-
   const user = session?.user;
 
   const [scrolled, setScrolled] = useState(false);
