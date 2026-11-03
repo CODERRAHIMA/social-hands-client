@@ -1,5 +1,4 @@
 import { CalendarCheck2, HandHeart } from "lucide-react";
-
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import EventCard from "@/components/shared/EventCard";
@@ -43,7 +42,7 @@ const JoinedEventsPage = async () => {
           {events.map((event: IEvent) => (
             <div key={event._id} className="h-full">
               <EventCard event={event} />
-              
+              cancel button add koro
             </div>
           ))}
         </div>

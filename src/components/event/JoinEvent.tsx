@@ -6,17 +6,16 @@ import { authClient } from "@/lib/auth-client";
 const JoinEvent = ({ event }: { event: IEvent }) => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  
+
   const handleJoinEvent = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    
+
     const data = {
-        username: user?.name,
-        email: user?.email,
-        userimage: user?.image,
-        ...event
-    }
-    console.log("Joining event with data:", data);
+      username: user?.name,
+      email: user?.email,
+      userimage: user?.image,
+      ...event,
+    };
 
     const res = await fetch("http://localhost:8000/joined-events", {
       method: "POST",
@@ -26,8 +25,7 @@ const JoinEvent = ({ event }: { event: IEvent }) => {
       body: JSON.stringify(data),
     });
 
-    const result = await res.json();
-    console.log("Join event response:", result);
+    await res.json();
   };
 
   return (

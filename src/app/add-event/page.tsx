@@ -1,6 +1,8 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import React, { useState } from "react";
+import { redirect } from "next/navigation";
 import {
   ArrowLeft,
   Sparkles,
@@ -23,14 +25,20 @@ const formProps = {
     description: "",
 };
 
-export default function CreateEventPage() {
+const CreateEventPage = () => {
+  const { data: session } = authClient.useSession();
+  const userEmail = session?.user?.email ?? "";
+
   const [formData, setFormData] = useState(formProps);
 
   const presets = [
-    { name: "Winter Clothes", url: "https://plus.unsplash.com/premium_photo-1661907706957-88832c243d2f?w=600" },
-    { name: "Blanket Relief", url: "https://plus.unsplash.com/premium_photo-1683135012485-412ba9531a3b?w=600" },
-    { name: "Cleanup", url: "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=600" },
-    { name: "Tree Plantation", url: "https://plus.unsplash.com/premium_photo-1681140560806-928e8b9a9a20?w=600" },
+    { name: "Donation", url: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=600" },
+    { name: "Cleanup", url: "https://plus.unsplash.com/premium_photo-1663092014878-68976d0b456e?w=600" },
+    { name: "Plantation", url: "https://images.unsplash.com/photo-1777150895644-2ca253ee1c93?w=600" },
+    { name: "Winter Relief", url: "https://plus.unsplash.com/premium_photo-1683135012485-412ba9531a3b?w=600" },
+    { name: "Food Drive", url: "https://images.unsplash.com/photo-1628717341663-0007b0ee2597?w=600" },
+    { name: "Health Camp", url: "https://images.unsplash.com/photo-1659718282962-452648b6eba6?w=600" },
+    { name: "Education", url: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=600" },
   ];
 
   const handleInputChange = (
@@ -48,18 +56,17 @@ export default function CreateEventPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitting Event Data: ", formData);
 
     const res = await fetch("http://localhost:8000/add-event", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ ...formData, creatorEmail: userEmail }),
     });
 
-    const data = await res.json();
-    console.log("Server Response: ", data);
+    await res.json();
+    redirect("/upcoming-events");
   };
 
   return (
@@ -246,7 +253,7 @@ export default function CreateEventPage() {
               Organizer Email attached:
             </span>
             <span className="text-[#0F172A] font-bold tracking-wide">
-              example@gmail.com
+              {userEmail}
             </span>
           </div>
 
@@ -263,3 +270,5 @@ export default function CreateEventPage() {
     </div>
   );
 }
+
+export default CreateEventPage;
