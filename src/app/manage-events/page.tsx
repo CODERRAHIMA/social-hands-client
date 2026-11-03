@@ -30,11 +30,20 @@ const ManageEventsPage = async () => {
             Keep track of the events you&apos;ve created, all in one place.
           </p>
         </div>
-        <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-[#42512C]/10 bg-white/80 px-4 py-3 text-sm font-medium text-[#42512C] shadow-sm">
-          <CalendarCheck2 className="h-4 w-4 text-[#647F52]" />
-          <span>
-            {events.length} {events.length === 1 ? "event" : "events"}
-          </span>
+        <div className="flex gap-2">
+          <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-[#42512C]/10 bg-white/80 px-4 py-3 text-sm font-medium text-[#42512C] shadow-sm">
+            <CalendarCheck2 className="h-4 w-4 text-[#647F52]" />
+            <span>
+              {events.length} {events.length === 1 ? "event" : "events"}
+            </span>
+          </div>
+          <Link
+            href="/add-event"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#42512C] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#344222] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#647F52]"
+          >
+            <Plus className="h-4 w-4" />
+            Create an event
+          </Link>
         </div>
       </header>
 

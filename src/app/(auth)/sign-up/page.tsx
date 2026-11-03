@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   Eye,
@@ -9,60 +9,80 @@ import {
   HeartHandshake,
   Sprout,
   UsersRound,
-} from "lucide-react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { authClient } from "@/lib/auth-client"; 
-import { redirect } from "next/navigation"
+} from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function SignUpPage() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [pending, setPending] = useState<"email" | "google" | null>(null);
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
+    setPending("email");
 
     const formData = new FormData(e.currentTarget);
-    
-    if(!formData.get("image")) {
-        formData.set("image", "/defaultImg.jpg")
+
+    if (!formData.get("image")) {
+      formData.set("image", "/defaultImg.jpg");
     }
 
-    const password = String(formData.get("password") ?? "")
-    const unmetRequirements: string[] = []
+    const password = String(formData.get("password") ?? "");
+    const unmetRequirements: string[] = [];
 
     if (!/[A-Z]/.test(password)) {
-      unmetRequirements.push("At least one uppercase letter")
+      unmetRequirements.push("At least one uppercase letter");
     }
     if (!/[a-z]/.test(password)) {
-      unmetRequirements.push("At least one lowercase letter")
+      unmetRequirements.push("At least one lowercase letter");
     }
     if (password.length < 6) {
-      unmetRequirements.push("At least 6 characters")
+      unmetRequirements.push("At least 6 characters");
     }
 
     if (unmetRequirements.length > 0) {
       window.alert(
         `Password requirements not met:\n\n${unmetRequirements.join("\n")}`,
-      )
+      );
     }
 
     const user = Object.fromEntries(formData.entries()) as {
-      name: string
-      email: string
-      image: string
-      password: string
+      name: string;
+      email: string;
+      image: string;
+      password: string;
     };
 
-    const {data, error} = await authClient.signUp.email({
-        ...user,
-    })
+    const { data, error } = await authClient.signUp.email({
+      ...user,
+    });
 
-    if(data){
-        redirect("/");
+    if (data) {
+      redirect("/");
     } else {
-        console.log(error);
+      console.log(error);
+    }
+  };
+
+  async function handleGoogleSignIn() {
+    setPending("google")
+
+    try {
+      const { error } = await authClient.signIn.social({
+        provider: "google",
+      })
+
+      if (error) {
+        alert(error.message || "Unable to continue with Google.")
+      }
+    } catch {
+      alert("Unable to continue with Google right now. Please try again.")
+    } finally {
+      setPending(null)
     }
   }
 
@@ -101,16 +121,15 @@ export default function SignUpPage() {
 
           <div className="relative z-10">
             <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2 text-xs font-semibold tracking-wide text-white/90 backdrop-blur-sm">
-              <Sprout size={16} aria-hidden="true" className="text-lime-200" />
-              A COMMUNITY THAT CARES
+              <Sprout size={16} aria-hidden="true" className="text-lime-200" />A
+              COMMUNITY THAT CARES
             </div>
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-lime-200">
               Small acts. Stronger communities.
             </p>
             <h1 className="max-w-lg text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
               Make room for
-              <br />
-              a little more good.
+              <br />a little more good.
             </h1>
             <p className="mt-5 max-w-md text-base leading-7 text-white/80 sm:text-lg">
               Find your people, share your time, and help make a difference
@@ -232,7 +251,9 @@ export default function SignUpPage() {
                     />
                     <button
                       type="button"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                       aria-pressed={showPassword}
                       onClick={() => setShowPassword((visible) => !visible)}
                       className="absolute inset-y-0 right-0 flex w-12 items-center justify-center rounded-r-xl text-[#777D70] transition-colors hover:text-[#42512C] focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-inset focus-visible:ring-[#647F52]/30"
@@ -261,6 +282,31 @@ export default function SignUpPage() {
               </FieldGroup>
             </form>
 
+            <div className="relative my-6 flex items-center">
+              <span className="h-px flex-1 bg-[#E8E9E1]" />
+              <span className="px-3 text-xs font-medium text-[#858A7D]">
+                OR CONTINUE WITH
+              </span>
+              <span className="h-px flex-1 bg-[#E8E9E1]" />
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGoogleSignIn}
+              disabled={pending !== null}
+              className="h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2]"
+            >
+              <Image
+                src="/google.png"
+                alt="googleIcon"
+                width={15}
+                height={15}
+                className="mr-1"
+              />
+              {pending === "google" ? "Connecting..." : "Continue with Google"}
+            </Button>
+
             <p className="mt-7 text-center text-sm text-[#64695D]">
               Already part of the community?{" "}
               <Link
@@ -271,12 +317,12 @@ export default function SignUpPage() {
               </Link>
             </p>
             <p className="mt-8 border-t border-[#E8E9E1] pt-5 text-center text-xs leading-5 text-[#858A7D]">
-              By creating an account, you’re taking the first step toward
-              making a difference in your community.
+              By creating an account, you’re taking the first step toward making
+              a difference in your community.
             </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
