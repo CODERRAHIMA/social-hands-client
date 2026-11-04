@@ -33,7 +33,7 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
       <div className="max-w-5xl mx-auto">
         {/* Back Button */}
         <Link
-          href="/events"
+          href="/upcoming-events"
           className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-teal-600 transition mb-6"
         >
           <ArrowLeft size={16} />

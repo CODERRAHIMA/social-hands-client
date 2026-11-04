@@ -25,11 +25,20 @@ const formProps = {
     description: "",
 };
 
+const getMinEventDate = () => {
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
+  const month = String(minDate.getMonth() + 1).padStart(2, "0");
+  const day = String(minDate.getDate()).padStart(2, "0");
+  return `${minDate.getFullYear()}-${month}-${day}`;
+};
+
 const CreateEventPage = () => {
   const { data: session } = authClient.useSession();
   const userEmail = session?.user?.email ?? "";
 
   const [formData, setFormData] = useState(formProps);
+  const minEventDate = getMinEventDate();
 
   const presets = [
     { name: "Donation", url: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=600" },
@@ -54,8 +63,18 @@ const CreateEventPage = () => {
     setFormData((prev) => ({ ...prev, image: url }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (formData.eventDate < getMinEventDate()) {
+      const dateInput = e.currentTarget.elements.namedItem("eventDate");
+      if (dateInput instanceof HTMLInputElement) {
+        dateInput.setCustomValidity("Please select a future date.");
+        dateInput.reportValidity();
+        dateInput.setCustomValidity("");
+      }
+      return;
+    }
 
     const res = await fetch("http://localhost:8000/add-event", {
       method: "POST",
@@ -158,12 +177,13 @@ const CreateEventPage = () => {
                   name="eventDate"
                   value={formData.eventDate}
                   onChange={handleInputChange}
+                  min={minEventDate}
                   required
                   className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all cursor-pointer"
                 />
               </div>
               <p className="text-[11px] text-[#64748B] tracking-wide mt-1 pl-1">
-                Dates must be in the future (today or later)
+                Dates must be in the future
               </p>
             </div>
           </div>

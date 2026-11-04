@@ -9,12 +9,17 @@ import { Button } from "@/components/ui/button"
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
+import { useSearchParams } from "next/navigation";
 
 export default function SignInPage() {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
   const [pending, setPending] = useState<"email" | "google" | null>(null)
   const [errorMessage, setErrorMessage] = useState("")
+
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/"; 
+
 
   async function handleEmailSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -27,7 +32,7 @@ export default function SignInPage() {
       const { error } = await authClient.signIn.email({
         email: String(formData.get("email") ?? ""),
         password: String(formData.get("password") ?? ""),
-        callbackURL: "/",
+        callbackURL: redirectTo,
       })
 
       if (error) {
@@ -35,7 +40,7 @@ export default function SignInPage() {
         return
       }
 
-      router.push("/")
+      router.push(redirectTo)
     } catch {
       setErrorMessage("Unable to sign in right now. Please try again.")
     } finally {
@@ -50,7 +55,7 @@ export default function SignInPage() {
     try {
       const { error } = await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/",
+        callbackURL: redirectTo,
       })
 
       if (error) {
