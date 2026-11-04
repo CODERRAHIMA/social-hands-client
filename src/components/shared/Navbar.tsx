@@ -29,6 +29,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
+
 
 const Navbar = () => {
 
@@ -46,6 +48,7 @@ const Navbar = () => {
 
   const handleSignout = () => {
     authClient.signOut();
+    redirect("/");
   };
 
   return (
@@ -101,6 +104,7 @@ const Navbar = () => {
             <Popover>
               <PopoverTrigger
                 nativeButton={false}
+                title={user?.name}
                 render={
                   <div className="flex items-center gap-3 rounded-full bg-white/70 border border-black/20 p-1.5 pr-3 shadow-sm transition-all duration-200 hover:bg-white hover:border-gray-400/70 hover:shadow-md cursor-pointer group">
                     <div className="relative">
