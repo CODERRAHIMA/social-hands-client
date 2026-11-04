@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { IEvent } from "@/lib/eventType";
+import { cn } from "cn";
 import {
   Pencil,
   Type,
@@ -23,7 +24,13 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function EditEventDialog({ event }: { event: IEvent }) {
+export function EditEventDialog({
+  event,
+  triggerClassName,
+}: {
+  event: IEvent;
+  triggerClassName?: string;
+}) {
   const [formData, setFormData] = useState(event);
   const router = useRouter();
 
@@ -54,8 +61,11 @@ export function EditEventDialog({ event }: { event: IEvent }) {
     <Dialog>
       <DialogTrigger
         render={
-          <Button variant="outline" className="flex-1 sm:flex-none">
-            <Pencil size={16} />
+          <Button
+            variant="outline"
+            className={cn("flex-1 sm:flex-none", triggerClassName)}
+          >
+            <Pencil className="h-4 w-4" />
             Edit
           </Button>
         }

@@ -12,8 +12,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { redirect } from "next/navigation";
+import { cn } from "cn";
 
-export function DeleteEventDialog({ id }: { id: string }) {
+export function DeleteEventDialog({
+  id,
+  triggerClassName,
+}: {
+  id: string;
+  triggerClassName?: string;
+}) {
     const handleDeleteEvent = async () => {
         const res = await fetch(`http://localhost:8000/upcoming-events/${id}`, {
             method: "DELETE"
@@ -26,8 +33,11 @@ export function DeleteEventDialog({ id }: { id: string }) {
     <AlertDialog>
       <AlertDialogTrigger
         render={
-          <Button variant="outline" className="flex-1 sm:flex-none">
-            <Trash size={16} />
+          <Button
+            variant="outline"
+            className={cn("flex-1 sm:flex-none", triggerClassName)}
+          >
+            <Trash className="h-4 w-4" />
             Delete
           </Button>
         }

@@ -1,9 +1,8 @@
 import { CalendarCheck2, HandHeart } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import EventCard from "@/components/shared/EventCard";
 import { IEvent } from "@/lib/eventType";
-import { Button } from "@base-ui/react";
+import MyEventCard from "@/components/shared/MyEventCard";
 
 const JoinedEventsPage = async () => {
   const session = await auth.api.getSession({
@@ -38,11 +37,10 @@ const JoinedEventsPage = async () => {
       </header>
 
       {events.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4">
           {events.map((event: IEvent) => (
             <div key={event._id} className="h-full">
-              <EventCard event={event} />
-              cancel button add koro
+              <MyEventCard event={event}/>
             </div>
           ))}
         </div>
