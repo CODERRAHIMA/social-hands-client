@@ -10,7 +10,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { IEvent } from "@/lib/eventType";
-import { cn } from "cn";
 import {
   Pencil,
   Type,
@@ -24,15 +23,26 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function EditEventDialog({
-  event,
-  triggerClassName,
-}: {
-  event: IEvent;
-  triggerClassName?: string;
-}) {
-  const [formData, setFormData] = useState(event);
+const getMinEventDate = () => {
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
+  const month = String(minDate.getMonth() + 1).padStart(2, "0");
+  const day = String(minDate.getDate()).padStart(2, "0");
+  return `${minDate.getFullYear()}-${month}-${day}`;
+};
+
+export function EditEventDialog({ event }: { event: IEvent }) {
+  const [formData, setFormData] = useState({
+    ...event,
+    eventDate: event.eventDate.slice(0, 10),
+  });
   const router = useRouter();
+  const minEventDate = getMinEventDate();
+  const labelClassName =
+    "flex items-center gap-1.5 text-sm font-semibold text-[#344222]";
+  const fieldClassName =
+    "w-full rounded-xl border border-[#E5E9DF] bg-[#FAFBF8] py-3 pl-11 pr-4 text-sm text-[#26351F] transition-colors placeholder:text-slate-400 hover:border-[#42512C]/30 focus:border-[#647F52] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#647F52]/10";
+  const iconClassName = "absolute left-4 top-3.5 h-4 w-4 text-[#647F52]";
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -42,8 +52,18 @@ export function EditEventDialog({
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (formData.eventDate < getMinEventDate()) {
+      const dateInput = e.currentTarget.elements.namedItem("eventDate");
+      if (dateInput instanceof HTMLInputElement) {
+        dateInput.setCustomValidity("Please select a future date.");
+        dateInput.reportValidity();
+        dateInput.setCustomValidity("");
+      }
+      return;
+    }
+
     const {_id, ...updatedEvent} = formData; // Exclude _id from the updated data
 
     const res = await fetch(`http://localhost:8000/upcoming-events/${event._id}`, {
@@ -63,55 +83,55 @@ export function EditEventDialog({
         render={
           <Button
             variant="outline"
-            className={cn("flex-1 sm:flex-none", triggerClassName)}
+            className="flex-1 sm:flex-none h-11 w-full justify-center rounded-xl border-[#42512C]/20 bg-white px-4 py-1 sm:py-0 font-semibold text-[#42512C] shadow-sm transition-all hover:border-[#42512C]/30 hover:bg-[#42512C]/5 hover:text-[#344222] focus-visible:ring-[#647F52]/30 sm:w-auto lg:w-full"
           >
             <Pencil className="h-4 w-4" />
             Edit
           </Button>
         }
       />
-      <DialogContent className="flex max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] min-w-xl max-w-2xl flex-col gap-0 overflow-x-hidden overflow-y-auto border border-emerald-100 bg-gradient-to-br from-white via-white to-emerald-50 p-0 shadow-2xl">
-        <DialogHeader className="border-b border-emerald-100 bg-emerald-50/70 py-5 pl-6 pr-12">
-          <DialogTitle className="text-xl font-bold text-slate-900">
+      <DialogContent className="flex max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-6xl flex-col gap-0 overflow-x-hidden overflow-y-auto rounded-2xl border border-[#E5E9DF] bg-white p-0 shadow-2xl shadow-[#26351F]/15 sm:max-w-3xl">
+        <DialogHeader className="border-b border-[#E5E9DF] bg-[#F7F9F4] px-5 py-5 pr-12 sm:px-7">
+          <DialogTitle className="text-xl font-bold tracking-tight text-[#26351F] sm:text-2xl">
             Update Event
           </DialogTitle>
-          <DialogDescription className="text-slate-600">
+          <DialogDescription className="mt-1 text-sm leading-6 text-slate-600">
             Modify the details for your social service initiative.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="w-full min-w-0 space-y-5 px-6 py-6">
+        <form onSubmit={handleSubmit} className="w-full min-w-0 space-y-5 px-5 py-5 sm:px-7 sm:py-6">
             {/* Form Segment: Event Title */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-                Event Title <span className="text-[#00A88E]">*</span>
+              <label className={labelClassName}>
+                Event title <span className="text-[#647F52]">*</span>
               </label>
               <div className="relative">
-                <Type className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                <Type className={iconClassName} />
                 <input
                   type="text"
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
                   required
-                  className="w-full rounded-xl border border-slate-200 bg-white/80 py-3 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 transition-all focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
             </div>
 
             {/* Form Layout Grid Row: Type & Date Selector */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               {/* Form Segment: Event Type */}
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-                  Event Type <span className="text-[#00A88E]">*</span>
+                <label className={labelClassName}>
+                  Event type <span className="text-[#647F52]">*</span>
                 </label>
                 <div className="relative">
-                  <Tag className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                  <Tag className={iconClassName} />
                   <select
                     name="eventType"
                     value={formData.eventType}
                     onChange={handleInputChange}
-                    className="w-full appearance-none rounded-xl border border-slate-200 bg-white/80 py-3 pl-11 pr-10 text-sm text-slate-900 transition-all focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className={`${fieldClassName} appearance-none pr-10`}
                   >
                     <option value="Donation">Donation</option>
                     <option value="Cleanup">Cleanup</option>
@@ -121,106 +141,116 @@ export function EditEventDialog({
                     <option value="Health Camp">Health Camp</option>
                     <option value="Education">Education</option>
                   </select>
-                  <ChevronDown className="absolute right-4 top-4 h-3.5 w-3.5 text-[#94A3B8] pointer-events-none" />
+                  <ChevronDown className="pointer-events-none absolute right-4 top-4 h-3.5 w-3.5 text-[#647F52]" />
                 </div>
               </div>
 
               {/* Form Segment: Event Date */}
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-                  Event Date <span className="text-[#00A88E]">*</span>
+                <label className={labelClassName}>
+                  Event date <span className="text-[#647F52]">*</span>
                 </label>
                 <div className="relative">
-                  <Calendar className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                  <Calendar className={iconClassName} />
                   <input
                     type="date"
                     name="eventDate"
                     value={formData.eventDate}
                     onChange={handleInputChange}
+                    min={minEventDate}
                     required
-                    className="w-full cursor-pointer rounded-xl border border-slate-200 bg-white/80 py-3 pl-11 pr-4 text-sm text-slate-900 transition-all focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className={`${fieldClassName} cursor-pointer`}
                   />
                 </div>
-                <p className="text-[11px] text-[#64748B] tracking-wide mt-1 pl-1">
-                  Dates must be in the future (today or later)
+                <p className="mt-1 pl-1 text-xs text-slate-500">
+                  Dates must be in the future
                 </p>
               </div>
             </div>
 
             {/* Form Segment: Location Area */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-                Location / Venue <span className="text-[#00A88E]">*</span>
+              <label className={labelClassName}>
+                Location / venue <span className="text-[#647F52]">*</span>
               </label>
               <div className="relative">
-                <MapPin className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                <MapPin className={iconClassName} />
                 <input
                   type="text"
                   name="location"
                   value={formData.location}
                   onChange={handleInputChange}
                   required
-                  className="w-full rounded-xl border border-slate-200 bg-white/80 py-3 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 transition-all focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
             </div>
 
             {/* Form Segment: Image Attachments */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#475569]">
-                Thumbnail Image URL <span className="text-[#00A88E]">*</span>
+              <label className={labelClassName}>
+                Thumbnail image URL <span className="text-[#647F52]">*</span>
               </label>
               <div className="relative">
-                <ImageIcon className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                <ImageIcon className={iconClassName} />
                 <input
                   type="url"
                   name="image"
                   value={formData.image}
                   onChange={handleInputChange}
                   required
-                  className="w-full rounded-xl border border-slate-200 bg-white/80 py-3 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 transition-all focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
             </div>
 
             {/* Form Segment: Large Text Area Description */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#475569]">
-                Event Description <span className="text-[#00A88E]">*</span>
+              <label className={labelClassName}>
+                Event description <span className="text-[#647F52]">*</span>
               </label>
               <div className="relative">
-                <FileText className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                <FileText className={`${iconClassName} top-4`} />
                 <textarea
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
                   required
                   rows={4}
-                  className="min-h-[110px] w-full resize-y rounded-xl border border-slate-200 bg-white/80 py-3 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 transition-all focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={`${fieldClassName} min-h-[110px] resize-y`}
                 />
               </div>
             </div>
 
             {/* User Account Verification Meta Section */}
-            <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-5 py-4 flex items-center justify-between text-xs sm:text-sm">
-              <span className="text-[#64748B] font-medium">
+            <div className="flex flex-col gap-1.5 rounded-xl border border-[#E5E9DF] bg-[#F7F9F4] px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-5">
+              <span className="font-medium text-slate-600">
                 Organizer Email attached:
               </span>
-              <span className="text-[#0F172A] font-bold tracking-wide">
-                example@gmail.com
+              <span className="font-semibold tracking-wide text-[#344222]">
+                {formData.creatorEmail}
               </span>
             </div>
-          <DialogFooter className="sticky bottom-0 z-10 -mx-6 border-t border-emerald-100 bg-white/95 px-6 py-4 backdrop-blur">
+          <DialogFooter className="sticky bottom-0 z-10 -mx-5 border-t border-[#E5E9DF] bg-white/95 px-5 py-4 backdrop-blur sm:-mx-7 sm:px-7">
             <DialogClose
               render={
-                <Button type="button" variant="outline">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-10 rounded-xl border-[#E5E9DF] px-5 font-semibold text-slate-600 hover:bg-[#F7F9F4] hover:text-[#344222]"
+                >
                   Cancel
                 </Button>
               }
             />
             <DialogClose
               render={
-                <Button type="submit">Save changes</Button>
+                <Button
+                  type="submit"
+                  className="h-10 rounded-xl bg-[#42512C] px-5 font-semibold text-white shadow-sm transition-colors hover:bg-[#344222]"
+                >
+                  Save changes
+                </Button>
               }
             />
           </DialogFooter>

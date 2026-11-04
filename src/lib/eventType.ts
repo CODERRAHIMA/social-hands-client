@@ -6,4 +6,5 @@ export interface IEvent {
   location: string;
   image: string;
   description: string;
+  creatorEmail: string;
 }

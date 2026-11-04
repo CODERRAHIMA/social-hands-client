@@ -34,16 +34,11 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
         {/* Back Button */}
         <Link
           href="/upcoming-events"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-teal-600 transition mb-6"
+          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-teal-600 transition mb-8"
         >
           <ArrowLeft size={16} />
           Back to Upcoming Events
         </Link>
-
-        <div className="pb-4 flex gap-2 justify-end">
-            <EditEventDialog key={event._id} event={event} />
-            <DeleteEventDialog id={event._id} />
-          </div>
 
         {/* Main Card */}
         <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-200">
