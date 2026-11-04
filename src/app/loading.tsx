@@ -1,17 +1,12 @@
-import { LoaderCircle } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Loading() {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className="flex min-h-[60vh] flex-col items-center justify-center gap-3 text-[#42512C]"
-    >
-      <LoaderCircle
-        aria-hidden="true"
-        className="h-9 w-9 animate-spin text-[#647F52]"
-      />
-      <p className="text-sm font-medium">Loading...</p>
+    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 text-[#42512C]">
+      <Spinner className="h-9 w-9 text-[#647F52]" />
+      <p className="text-sm font-medium" aria-hidden="true">
+        Loading...
+      </p>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
 import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast"
 
 export default function SignInPage() {
   const router = useRouter()
@@ -36,20 +37,22 @@ export default function SignInPage() {
       })
 
       if (error) {
-        setErrorMessage(error.message || "Unable to sign in. Please try again.")
+        toast.error("Unable to sign in. Please try again.");
+        setErrorMessage(error.message || "Unable to sign in. Please try again.");
         return
       }
 
+      toast.success("Signed in successfully.")
       router.push(redirectTo)
     } catch {
-      setErrorMessage("Unable to sign in right now. Please try again.")
+      toast.error("Unable to sign in right now. Please try again.")
     } finally {
       setPending(null)
     }
   }
 
   async function handleGoogleSignIn() {
-    setErrorMessage("")
+    // setErrorMessage("")
     setPending("google")
 
     try {
@@ -59,10 +62,13 @@ export default function SignInPage() {
       })
 
       if (error) {
-        setErrorMessage(error.message || "Unable to continue with Google.")
+        toast.error("Unable to continue with Google.");
+        setErrorMessage(error.message || "Unable to continue with Google.");
+      } else {
+        toast.success("Google Signin Successful.")
       }
     } catch {
-      setErrorMessage("Unable to continue with Google right now. Please try again.")
+      toast.error("Unable to continue with Google right now. Please try again.")
     } finally {
       setPending(null)
     }
@@ -181,7 +187,7 @@ export default function SignInPage() {
               variant="outline"
               disabled={pending !== null}
               onClick={handleGoogleSignIn}
-              className="h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2]"
+              className="cursor-pointer h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2]"
             >
 
                 

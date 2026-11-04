@@ -15,10 +15,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { EditEventDialog } from "@/components/event/EditEventDialog";
-import { DeleteEventDialog } from "@/components/event/DeleteEventDialog";
 import { IEvent } from "@/lib/eventType";
 import JoinEvent from "./JoinEvent";
+import toast from "react-hot-toast";
 
 const EventDetailPage = ({ event }: { event: IEvent }) => {
   const formattedDate = new Date(event.eventDate).toLocaleDateString("en-US", {
@@ -108,7 +107,9 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
                   size="icon"
                   className="bg-white shrink-0"
                   onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
+                    navigator.clipboard.writeText(window.location.href)
+                      .then(() => toast.success("Event link copied."))
+                      .catch(() => toast.error("Unable to copy the event link."));
                   }}
                 >
                   <Share2 size={17} />

@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const getMinEventDate = () => {
   const minDate = new Date();
@@ -66,16 +67,26 @@ export function EditEventDialog({ event }: { event: IEvent }) {
 
     const {_id, ...updatedEvent} = formData; // Exclude _id from the updated data
 
-    const res = await fetch(`http://localhost:8000/upcoming-events/${event._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedEvent), 
-    });
+    try {
+      const res = await fetch(`http://localhost:8000/upcoming-events/${event._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedEvent),
+      });
 
-    await res.json();
-    router.refresh(); 
+      if (!res.ok) {
+        toast.error("Unable to update the event. Please try again.");
+        return;
+      }
+
+      await res.json();
+      toast.success("Event updated successfully.");
+      router.refresh();
+    } catch {
+      toast.error("Unable to update the event. Please try again.");
+    }
   };
   return (
     <Dialog>

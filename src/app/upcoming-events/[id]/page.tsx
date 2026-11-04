@@ -1,3 +1,4 @@
+import NotFound from "@/app/not-found";
 import EventDetailPage from "@/components/event/EventDetail";
 import React from "react";
 
@@ -13,7 +14,11 @@ const page = async ({ params }: { params: { id: string } }) => {
   });
 
   if (!res.ok) {
-    return <div>Event not found</div>;
+    return (
+      <>
+        <NotFound />
+      </>
+    );
   }
 
   const event = await res.json();

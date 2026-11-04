@@ -12,13 +12,23 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 export function DeleteEventDialog({id}: {id: string}) {
     const handleDeleteEvent = async () => {
-        const res = await fetch(`http://localhost:8000/upcoming-events/${id}`, {
-            method: "DELETE"
-        })
-        await res.json();
+        try {
+            const res = await fetch(`http://localhost:8000/upcoming-events/${id}`, {
+                method: "DELETE"
+            })
+            if (!res.ok) {
+                toast.error("Unable to delete the event. Please try again.");
+                return;
+            }
+            toast.success("Event deleted successfully.");
+        } catch {
+            toast.error("Unable to delete the event. Please try again.");
+            return;
+        }
         redirect("/manage-events");
     };
 

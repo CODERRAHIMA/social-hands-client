@@ -5,6 +5,7 @@ import { Heart } from "lucide-react";
 import { IEvent } from "@/lib/eventType";
 import { authClient } from "@/lib/auth-client";
 import { useRouter, usePathname } from "next/navigation";
+import toast from "react-hot-toast";
 
 const JoinEvent = ({ event }: { event: IEvent }) => {
   const { data: session } = authClient.useSession();
@@ -27,11 +28,17 @@ const JoinEvent = ({ event }: { event: IEvent }) => {
 
       const responseData = await res.json();
       if (res.ok) {
-        setIsJoined(responseData.joined); 
-        alert(responseData.message);
+        setIsJoined(responseData.joined);
+        toast.success(
+          responseData.joined
+            ? "You've joined this event."
+            : "You've left this event.",
+        );
+      } else {
+        toast.error("Unable to update your event registration. Please try again.");
       }
-    } catch (error) {
-      alert("Something went wrong.");
+    } catch {
+      toast.error("Unable to update your event registration. Please try again.");
     }
   };
 

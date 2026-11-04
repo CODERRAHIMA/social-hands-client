@@ -16,6 +16,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -45,7 +46,7 @@ export default function SignUpPage() {
     }
 
     if (unmetRequirements.length > 0) {
-      window.alert(
+      toast.error(
         `Password requirements not met:\n\n${unmetRequirements.join("\n")}`,
       );
     }
@@ -57,14 +58,25 @@ export default function SignUpPage() {
       password: string;
     };
 
-    const { data, error } = await authClient.signUp.email({
-      ...user,
-    });
+    let accountCreated = false;
+    try {
+      const { data, error } = await authClient.signUp.email({
+        ...user,
+      });
 
-    if (data) {
+      if (data) {
+        toast.success("Your account has been created.");
+        accountCreated = true;
+      } else {
+        toast.error(error?.message || "Unable to create your account.");
+      }
+    } catch {
+      toast.error("Unable to create your account right now. Please try again.");
+    } finally {
+      setPending(null);
+    }
+    if (accountCreated) {
       redirect("/");
-    } else {
-      console.log(error);
     }
   };
 
@@ -77,10 +89,12 @@ export default function SignUpPage() {
       })
 
       if (error) {
-        alert(error.message || "Unable to continue with Google.")
+        toast.error(error.message || "Unable to continue with Google.")
+      } else {
+          toast.success("Google Signin Successful.")
       }
     } catch {
-      alert("Unable to continue with Google right now. Please try again.")
+      toast.error("Unable to continue with Google right now. Please try again.")
     } finally {
       setPending(null)
     }
@@ -295,7 +309,7 @@ export default function SignUpPage() {
               variant="outline"
               onClick={handleGoogleSignIn}
               disabled={pending !== null}
-              className="h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2]"
+              className="cursor-pointer h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2]"
             >
               <Image
                 src="/google.png"

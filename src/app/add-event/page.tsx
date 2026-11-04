@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import React, { useState } from "react";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 import {
   ArrowLeft,
   Sparkles,
@@ -76,15 +77,27 @@ const CreateEventPage = () => {
       return;
     }
 
-    const res = await fetch("http://localhost:8000/add-event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...formData, creatorEmail: userEmail }),
-    });
+    try {
+      const res = await fetch("http://localhost:8000/add-event", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, creatorEmail: userEmail }),
+      });
 
-    await res.json();
+      if (!res.ok) {
+        toast.error("Unable to publish the event. Please try again.");
+        return;
+      }
+
+      await res.json();
+      toast.success("Your event has been published.");
+    } catch {
+      toast.error("Unable to publish the event. Please try again.");
+      return;
+    }
+
     redirect("/upcoming-events");
   };
 

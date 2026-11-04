@@ -31,6 +31,8 @@ import {
 } from "@/components/ui/popover";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { Spinner } from "../ui/spinner";
+import toast from "react-hot-toast";
 
 const themeChangeEvent = "navbar-theme-change";
 
@@ -73,8 +75,18 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleSignout = () => {
-    authClient.signOut();
+  const handleSignout = async () => {
+    try {
+      const { error } = await authClient.signOut();
+      if (error) {
+        toast.error("Unable to sign out. Please try again.");
+        return;
+      }
+      toast.success("Signed out successfully.");
+    } catch {
+      toast.error("Unable to sign out. Please try again.");
+      return;
+    }
     redirect("/");
   };
 
@@ -112,7 +124,9 @@ const Navbar = () => {
             height={40}
             className="h-10 w-10 rounded-full object-cover"
           />
-          <span className={`text-xl font-extrabold leading-5 tracking-tight ${isDark ? "text-[#D2E0B8]" : "text-[#42512C]"}`}>
+          <span
+            className={`text-xl font-extrabold leading-5 tracking-tight ${isDark ? "text-[#D2E0B8]" : "text-[#42512C]"}`}
+          >
             SocialHands
           </span>
         </Link>
@@ -144,7 +158,11 @@ const Navbar = () => {
                 : "border-black/10 bg-white/70 text-[#42512C] hover:bg-white hover:text-[#1C2012]"
             }`}
           >
-            {isDark ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
+            {isDark ? (
+              <Sun size={20} aria-hidden="true" />
+            ) : (
+              <Moon size={20} aria-hidden="true" />
+            )}
           </Button>
 
           {!hasMounted ? (
@@ -155,11 +173,13 @@ const Navbar = () => {
                 nativeButton={false}
                 title={user?.name}
                 render={
-                  <div className={`group flex cursor-pointer items-center gap-3 rounded-full border p-1.5 pr-3 shadow-sm transition-all duration-200 ${
-                    isDark
-                      ? "border-white/15 bg-white/10 hover:border-white/25 hover:bg-white/15 hover:shadow-md"
-                      : "border-black/20 bg-white/70 hover:border-gray-400/70 hover:bg-white hover:shadow-md"
-                  }`}>
+                  <div
+                    className={`group flex cursor-pointer items-center gap-3 rounded-full border p-1.5 pr-3 shadow-sm transition-all duration-200 ${
+                      isDark
+                        ? "border-white/15 bg-white/10 hover:border-white/25 hover:bg-white/15 hover:shadow-md"
+                        : "border-black/20 bg-white/70 hover:border-gray-400/70 hover:bg-white hover:shadow-md"
+                    }`}
+                  >
                     <div className="relative">
                       <Avatar className="h-8 w-8">
                         <AvatarImage
@@ -171,11 +191,13 @@ const Navbar = () => {
                       <AvatarBadge className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500" />
                     </div>
 
-                    <ChevronDown className={`h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5 ${
-                      isDark
-                        ? "text-white/70 group-hover:text-white"
-                        : "text-[#42512C] group-hover:text-gray-600"
-                    }`} />
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5 ${
+                        isDark
+                          ? "text-white/70 group-hover:text-white"
+                          : "text-[#42512C] group-hover:text-gray-600"
+                      }`}
+                    />
                   </div>
                 }
               ></PopoverTrigger>
@@ -189,12 +211,18 @@ const Navbar = () => {
                 }`}
               >
                 {/* User Info */}
-                <PopoverHeader className={`border-b px-4 py-2 text-left ${isDark ? "border-white/10" : "border-gray-100"}`}>
-                  <PopoverTitle className={`text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}>
+                <PopoverHeader
+                  className={`border-b px-4 py-2 text-left ${isDark ? "border-white/10" : "border-gray-100"}`}
+                >
+                  <PopoverTitle
+                    className={`text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}
+                  >
                     {user?.name}
                   </PopoverTitle>
 
-                  <PopoverDescription className={`mt-1 text-xs ${isDark ? "text-white/55" : "text-gray-500"}`}>
+                  <PopoverDescription
+                    className={`mt-1 text-xs ${isDark ? "text-white/55" : "text-gray-500"}`}
+                  >
                     {user?.email}
                   </PopoverDescription>
                 </PopoverHeader>
@@ -204,7 +232,9 @@ const Navbar = () => {
                   <Link
                     href="/add-event"
                     className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                      isDark ? "text-white/80 hover:bg-white/10 hover:text-white" : "text-gray-700 hover:bg-teal-50 hover:text-teal-600"
+                      isDark
+                        ? "text-white/80 hover:bg-white/10 hover:text-white"
+                        : "text-gray-700 hover:bg-teal-50 hover:text-teal-600"
                     }`}
                   >
                     <PlusCircle className="h-[18px] w-[18px] text-teal-500" />
@@ -214,7 +244,9 @@ const Navbar = () => {
                   <Link
                     href="/manage-events"
                     className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                      isDark ? "text-white/80 hover:bg-white/10 hover:text-white" : "text-gray-700 hover:bg-violet-50 hover:text-violet-600"
+                      isDark
+                        ? "text-white/80 hover:bg-white/10 hover:text-white"
+                        : "text-gray-700 hover:bg-violet-50 hover:text-violet-600"
                     }`}
                   >
                     <Settings className="h-[18px] w-[18px] text-violet-500" />
@@ -224,7 +256,9 @@ const Navbar = () => {
                   <Link
                     href="/joined-events"
                     className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                      isDark ? "text-white/80 hover:bg-white/10 hover:text-white" : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
+                      isDark
+                        ? "text-white/80 hover:bg-white/10 hover:text-white"
+                        : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
                     }`}
                   >
                     <CircleCheck className="h-[18px] w-[18px] text-emerald-500" />
@@ -233,11 +267,15 @@ const Navbar = () => {
                 </div>
 
                 {/* Logout */}
-                <div className={`border-t p-2 ${isDark ? "border-white/10" : "border-gray-100"}`}>
+                <div
+                  className={`border-t p-2 ${isDark ? "border-white/10" : "border-gray-100"}`}
+                >
                   <button
                     onClick={handleSignout}
                     className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
-                      isDark ? "text-red-300 hover:bg-red-400/10" : "text-red-500 hover:bg-red-50"
+                      isDark
+                        ? "text-red-300 hover:bg-red-400/10"
+                        : "text-red-500 hover:bg-red-50"
                     }`}
                   >
                     <LogOut className="h-[18px] w-[18px]" />
