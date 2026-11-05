@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { Button } from "@/components/ui/button";
 import {
   CalendarDays,
@@ -31,23 +36,8 @@ import {
 } from "@/components/ui/popover";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
-import { Spinner } from "../ui/spinner";
 import toast from "react-hot-toast";
 
-const themeChangeEvent = "navbar-theme-change";
-
-const subscribeToTheme = (onChange: () => void) => {
-  window.addEventListener("storage", onChange);
-  window.addEventListener(themeChangeEvent, onChange);
-  return () => {
-    window.removeEventListener("storage", onChange);
-    window.removeEventListener(themeChangeEvent, onChange);
-  };
-};
-
-const getThemeSnapshot = () =>
-  window.localStorage.getItem("navbar-theme") === "dark";
-const getServerThemeSnapshot = () => false;
 const subscribeToMount = () => () => {};
 const getMountSnapshot = () => true;
 const getServerMountSnapshot = () => false;
@@ -57,11 +47,6 @@ const Navbar = () => {
   const user = session?.user;
 
   const [scrolled, setScrolled] = useState(false);
-  const isDark = useSyncExternalStore(
-    subscribeToTheme,
-    getThemeSnapshot,
-    getServerThemeSnapshot,
-  );
   const hasMounted = useSyncExternalStore(
     subscribeToMount,
     getMountSnapshot,
@@ -74,6 +59,32 @@ const Navbar = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Re-apply the saved theme after React's development remount resets <html>.
+  useLayoutEffect(() => {
+    try {
+      const storedTheme = localStorage.getItem("theme");
+      if (storedTheme === "dark" || storedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", storedTheme);
+      }
+    } catch {
+      // localStorage can be unavailable (private mode, blocked cookies, etc.).
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const nextTheme =
+      root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+
+    root.setAttribute("data-theme", nextTheme);
+
+    try {
+      localStorage.setItem("theme", nextTheme);
+    } catch {
+      // The visual theme still updates even if persistence is unavailable.
+    }
+  };
 
   const handleSignout = async () => {
     try {
@@ -90,26 +101,16 @@ const Navbar = () => {
     redirect("/");
   };
 
-  const toggleTheme = () => {
-    const nextTheme = !isDark;
-    window.localStorage.setItem("navbar-theme", nextTheme ? "dark" : "light");
-    window.dispatchEvent(new Event(themeChangeEvent));
-  };
-
   return (
     <nav
       aria-label="Main navigation"
       className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5"
     >
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-[28px] border px-4 backdrop-blur-xl transition-all duration-300 sm:px-6 ${
-          isDark
-            ? scrolled
-              ? "border-white/10 bg-[#1C2018]/95 py-2 text-white shadow-xl shadow-black/30"
-              : "border-white/10 bg-[#1C2018]/85 py-3 text-white shadow-lg shadow-black/20"
-            : scrolled
-              ? "border-black/10 bg-[#F9F9F2]/95 py-2 text-[#26351F] shadow-xl shadow-black/15"
-              : "border-white/50 bg-[#F9F9F2]/80 py-3 text-[#26351F] shadow-lg shadow-black/5"
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-[28px] border px-4 text-[#26351F] backdrop-blur-xl transition-all duration-300 sm:px-6 ${
+          scrolled
+            ? "border-black/10 bg-[#F9F9F2]/95 py-2 shadow-xl shadow-black/15"
+            : "border-white/50 bg-[#F9F9F2]/80 py-3 shadow-lg shadow-black/5 dark:border-white/10 dark:shadow-black/30"
         }`}
       >
         {/* Logo */}
@@ -125,7 +126,7 @@ const Navbar = () => {
             className="h-10 w-10 rounded-full object-cover"
           />
           <span
-            className={`text-xl font-extrabold leading-5 tracking-tight ${isDark ? "text-[#D2E0B8]" : "text-[#42512C]"}`}
+            className="text-xl font-extrabold leading-5 tracking-tight text-[#42512C]"
           >
             SocialHands
           </span>
@@ -134,11 +135,7 @@ const Navbar = () => {
         {/* Upcoming Events */}
         <Link
           href="/upcoming-events"
-          className={`hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors outline-none focus-visible:ring-3 focus-visible:ring-[#647F52]/40 md:flex ${
-            isDark
-              ? "text-white/75 hover:bg-white/10 hover:text-white"
-              : "text-[#42512C]/80 hover:bg-[#42512C]/10 hover:text-[#1C2012]"
-          }`}
+          className="hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#42512C]/80 transition-colors outline-none hover:bg-[#42512C]/10 hover:text-[#1C2012] focus-visible:ring-3 focus-visible:ring-[#647F52]/40 md:flex"
         >
           <CalendarDays aria-hidden="true" size={19} />
           Upcoming Events
@@ -149,22 +146,15 @@ const Navbar = () => {
           <Button
             variant="outline"
             size="icon"
-            aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-            title={`Switch to ${isDark ? "light" : "dark"} mode`}
+            type="button"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode"
             onClick={toggleTheme}
-            className={`h-10 w-10 rounded-full shadow-sm transition-colors ${
-              isDark
-                ? "border-white/15 bg-white/10 text-amber-300 hover:bg-white/20 hover:text-amber-200"
-                : "border-black/10 bg-white/70 text-[#42512C] hover:bg-white hover:text-[#1C2012]"
-            }`}
+            className="h-10 w-10 rounded-full border-black/10 bg-white/70 text-[#42512C] shadow-sm hover:bg-white hover:text-[#1C2012]"
           >
-            {isDark ? (
-              <Sun size={20} aria-hidden="true" />
-            ) : (
-              <Moon size={20} aria-hidden="true" />
-            )}
+            <Moon size={20} aria-hidden="true" className="dark:hidden" />
+            <Sun size={20} aria-hidden="true" className="hidden dark:block" />
           </Button>
-
           {!hasMounted ? (
             <div aria-hidden="true" className="h-10 w-10" />
           ) : user ? (
@@ -174,11 +164,7 @@ const Navbar = () => {
                 title={user?.name}
                 render={
                   <div
-                    className={`group flex cursor-pointer items-center gap-3 rounded-full border p-1.5 pr-3 shadow-sm transition-all duration-200 ${
-                      isDark
-                        ? "border-white/15 bg-white/10 hover:border-white/25 hover:bg-white/15 hover:shadow-md"
-                        : "border-black/20 bg-white/70 hover:border-gray-400/70 hover:bg-white hover:shadow-md"
-                    }`}
+                    className="group flex cursor-pointer items-center gap-3 rounded-full border border-black/20 bg-white/70 p-1.5 pr-3 shadow-sm transition-all duration-200 hover:border-gray-400/70 hover:bg-white hover:shadow-md"
                   >
                     <div className="relative">
                       <Avatar className="h-8 w-8">
@@ -192,11 +178,7 @@ const Navbar = () => {
                     </div>
 
                     <ChevronDown
-                      className={`h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5 ${
-                        isDark
-                          ? "text-white/70 group-hover:text-white"
-                          : "text-[#42512C] group-hover:text-gray-600"
-                      }`}
+                      className="h-4 w-4 text-[#42512C] transition-transform duration-200 group-hover:translate-y-0.5 group-hover:text-gray-600"
                     />
                   </div>
                 }
@@ -204,24 +186,20 @@ const Navbar = () => {
               <PopoverContent
                 align="end"
                 sideOffset={12}
-                className={`w-[220px] overflow-hidden rounded-2xl p-0 shadow-xl ${
-                  isDark
-                    ? "border-white/10 bg-[#252A20] shadow-black/30"
-                    : "border-gray-200 bg-white shadow-gray-900/10"
-                }`}
+                className="w-[220px] overflow-hidden rounded-2xl border-gray-200 bg-white p-0 shadow-xl shadow-gray-900/10"
               >
                 {/* User Info */}
                 <PopoverHeader
-                  className={`border-b px-4 py-2 text-left ${isDark ? "border-white/10" : "border-gray-100"}`}
+                  className="border-b border-gray-100 px-4 py-2 text-left"
                 >
                   <PopoverTitle
-                    className={`text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}
+                    className="text-sm font-bold text-gray-900"
                   >
                     {user?.name}
                   </PopoverTitle>
 
                   <PopoverDescription
-                    className={`mt-1 text-xs ${isDark ? "text-white/55" : "text-gray-500"}`}
+                    className="mt-1 text-xs text-gray-500"
                   >
                     {user?.email}
                   </PopoverDescription>
@@ -231,11 +209,7 @@ const Navbar = () => {
                 <div className="px-2">
                   <Link
                     href="/add-event"
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                      isDark
-                        ? "text-white/80 hover:bg-white/10 hover:text-white"
-                        : "text-gray-700 hover:bg-teal-50 hover:text-teal-600"
-                    }`}
+                    className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-teal-50 hover:text-teal-600"
                   >
                     <PlusCircle className="h-[18px] w-[18px] text-teal-500" />
                     Create Event
@@ -243,11 +217,7 @@ const Navbar = () => {
 
                   <Link
                     href="/manage-events"
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                      isDark
-                        ? "text-white/80 hover:bg-white/10 hover:text-white"
-                        : "text-gray-700 hover:bg-violet-50 hover:text-violet-600"
-                    }`}
+                    className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-600"
                   >
                     <Settings className="h-[18px] w-[18px] text-violet-500" />
                     Manage Events
@@ -255,11 +225,7 @@ const Navbar = () => {
 
                   <Link
                     href="/joined-events"
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                      isDark
-                        ? "text-white/80 hover:bg-white/10 hover:text-white"
-                        : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
-                    }`}
+                    className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-emerald-50 hover:text-emerald-600"
                   >
                     <CircleCheck className="h-[18px] w-[18px] text-emerald-500" />
                     Joined Events
@@ -268,15 +234,11 @@ const Navbar = () => {
 
                 {/* Logout */}
                 <div
-                  className={`border-t p-2 ${isDark ? "border-white/10" : "border-gray-100"}`}
+                  className="border-t border-gray-100 p-2"
                 >
                   <button
                     onClick={handleSignout}
-                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
-                      isDark
-                        ? "text-red-300 hover:bg-red-400/10"
-                        : "text-red-500 hover:bg-red-50"
-                    }`}
+                    className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-500 transition-colors hover:bg-red-50"
                   >
                     <LogOut className="h-[18px] w-[18px]" />
                     Logout

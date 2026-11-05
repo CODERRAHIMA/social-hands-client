@@ -1,3 +1,512 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+
+/* The app uses a data-theme attribute on <html> instead of a `.dark` class. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  color-scheme: light;
+  --toast-bg: #ffffff;
+  --toast-fg: #363636;
+}
+
+html {
+  background-color: #f7f6f1;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --toast-bg: #1b2318;
+  --toast-fg: #e8efe3;
+  background-color: #0b0f0a;
+}
+
+html[data-theme="dark"] body {
+  background-color: #0b0f0a;
+  color: #e8efe3;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Dark theme overrides for the project's existing hard-coded palette.
+   These are intentionally unlayered so they take precedence over the
+   Tailwind utility classes they replace, while leaving the light theme
+   completely untouched.
+--------------------------------------------------------------------------- */
+
+/* App, cards and other light surfaces */
+html[data-theme="dark"] [class~="bg-[#F7F6F1]"] {
+  background-color: #0b0f0a;
+}
+
+html[data-theme="dark"] [class~="bg-[#F9F9F2]"] {
+  background-color: #0b0f0a;
+}
+
+html[data-theme="dark"] [class~="bg-[#F9F9F2]/80"] {
+  background-color: rgb(17 23 14 / 0.8);
+}
+
+html[data-theme="dark"] [class~="bg-[#F9F9F2]/95"] {
+  background-color: rgb(17 23 14 / 0.95);
+}
+
+html[data-theme="dark"] [class~="bg-[#F8FAFC]"],
+html[data-theme="dark"] [class~="bg-[#f8fafc]"] {
+  background-color: #11160f;
+}
+
+html[data-theme="dark"] [class~="bg-[#FAFBF8]"],
+html[data-theme="dark"] [class~="bg-[#FDFCFA]"] {
+  background-color: #141a12;
+}
+
+html[data-theme="dark"] [class~="bg-[#F7F9F4]"] {
+  background-color: #11170e;
+}
+
+html[data-theme="dark"] [class~="bg-[#E8E9E1]"] {
+  background-color: #2a3326;
+}
+
+html[data-theme="dark"] [class~="bg-white"] {
+  background-color: #151b12;
+}
+
+html[data-theme="dark"] [class~="bg-white/60"] {
+  background-color: rgb(21 27 18 / 0.6);
+}
+
+html[data-theme="dark"] [class~="bg-white/70"] {
+  background-color: rgb(21 27 18 / 0.7);
+}
+
+html[data-theme="dark"] [class~="bg-white/80"] {
+  background-color: rgb(21 27 18 / 0.8);
+}
+
+html[data-theme="dark"] [class~="bg-white/95"] {
+  background-color: rgb(21 27 18 / 0.95);
+}
+
+html[data-theme="dark"] [class~="bg-slate-50"],
+html[data-theme="dark"] [class~="bg-slate-50/50"] {
+  background-color: #0f140d;
+}
+
+html[data-theme="dark"] [class~="bg-gray-50"] {
+  background-color: #1a2116;
+}
+
+html[data-theme="dark"] [class~="bg-teal-50"] {
+  background-color: #0f2a26;
+}
+
+html[data-theme="dark"] [class~="bg-teal-100"] {
+  background-color: #123a34;
+}
+
+html[data-theme="dark"] [class~="bg-red-50"] {
+  background-color: #2a1515;
+}
+
+html[data-theme="dark"] [class~="bg-[#42512C]/5"] {
+  background-color: rgb(185 214 161 / 0.08);
+}
+
+html[data-theme="dark"] [class~="bg-[#647F52]/10"] {
+  background-color: rgb(155 194 125 / 0.14);
+}
+
+html[data-theme="dark"] [class~="bg-[#00A88E]/10"] {
+  background-color: rgb(45 212 191 / 0.12);
+}
+
+html[data-theme="dark"] [class~="bg-[#D9CBA7]/25"] {
+  background-color: rgb(217 203 167 / 0.1);
+}
+
+html[data-theme="dark"] [class~="bg-[#42512C]"] {
+  background-color: #54713f;
+}
+
+html[data-theme="dark"] [class~="bg-[#647F52]"] {
+  background-color: #6f9455;
+}
+
+/* Newsletter gradient */
+html[data-theme="dark"] [class~="from-[#dff5f2]"] {
+  --tw-gradient-from: #10201d;
+}
+
+html[data-theme="dark"] [class~="via-white"] {
+  --tw-gradient-via: #121a12;
+}
+
+html[data-theme="dark"] [class~="to-[#e4f5f0]"] {
+  --tw-gradient-to: #0f1f1a;
+}
+
+/* Text */
+html[data-theme="dark"] [class~="text-[#26351f]"],
+html[data-theme="dark"] [class~="text-[#26351F]"],
+html[data-theme="dark"] [class~="text-[#1C2012]"],
+html[data-theme="dark"] [class~="text-[#0F172A]"],
+html[data-theme="dark"] [class~="text-[#1E293B]"],
+html[data-theme="dark"] [class~="text-[#10172A]"] {
+  color: #e8efe3;
+}
+
+html[data-theme="dark"] [class~="text-[#26351f]/75"] {
+  color: rgb(232 239 227 / 0.75);
+}
+
+html[data-theme="dark"] [class~="text-[#26351f]/65"] {
+  color: rgb(232 239 227 / 0.65);
+}
+
+html[data-theme="dark"] [class~="text-[#26351f]/55"] {
+  color: rgb(232 239 227 / 0.55);
+}
+
+html[data-theme="dark"] [class~="text-[#42512C]"] {
+  color: #b9d6a1;
+}
+
+html[data-theme="dark"] [class~="text-[#42512C]/80"] {
+  color: rgb(185 214 161 / 0.8);
+}
+
+html[data-theme="dark"] [class~="text-[#344222]"] {
+  color: #c3ddb0;
+}
+
+html[data-theme="dark"] [class~="text-[#343A2D]"] {
+  color: #d7e2cd;
+}
+
+html[data-theme="dark"] [class~="text-[#647F52]"] {
+  color: #9bc27d;
+}
+
+html[data-theme="dark"] [class~="text-[#64695D]"] {
+  color: #a8b3a0;
+}
+
+html[data-theme="dark"] [class~="text-[#475569]"] {
+  color: #c3cdbb;
+}
+
+html[data-theme="dark"] [class~="text-[#64748B]"] {
+  color: #a8b3a0;
+}
+
+html[data-theme="dark"] [class~="text-[#777D70]"] {
+  color: #a8b3a0;
+}
+
+html[data-theme="dark"] [class~="text-[#858A7D]"] {
+  color: #9aa694;
+}
+
+html[data-theme="dark"] [class~="text-[#92968B]"],
+html[data-theme="dark"] [class~="text-[#94A3B8]"] {
+  color: #87957f;
+}
+
+html[data-theme="dark"] [class~="text-[#CBD5E1]"] {
+  color: #3a4634;
+}
+
+html[data-theme="dark"] [class~="text-[#008772]"],
+html[data-theme="dark"] [class~="text-[#009E91]"],
+html[data-theme="dark"] [class~="text-[#00A88E]"] {
+  color: #2dd4bf;
+}
+
+html[data-theme="dark"] [class~="text-black/50"] {
+  color: rgb(232 239 227 / 0.58);
+}
+
+html[data-theme="dark"] [class~="text-black/60"] {
+  color: rgb(232 239 227 / 0.68);
+}
+
+html[data-theme="dark"] [class~="text-slate-400"] {
+  color: #7f8b78;
+}
+
+html[data-theme="dark"] [class~="text-slate-500"] {
+  color: #94a38c;
+}
+
+html[data-theme="dark"] [class~="text-slate-600"] {
+  color: #a8b3a0;
+}
+
+html[data-theme="dark"] [class~="text-slate-700"] {
+  color: #c3cdbb;
+}
+
+html[data-theme="dark"] [class~="text-slate-800"] {
+  color: #e2ebdc;
+}
+
+html[data-theme="dark"] [class~="text-gray-500"] {
+  color: #95a28d;
+}
+
+html[data-theme="dark"] [class~="text-gray-600"] {
+  color: #a8b3a0;
+}
+
+html[data-theme="dark"] [class~="text-gray-700"] {
+  color: #c3cdbb;
+}
+
+html[data-theme="dark"] [class~="text-gray-900"] {
+  color: #eef4e9;
+}
+
+html[data-theme="dark"] [class~="text-teal-500"] {
+  color: #2dd4bf;
+}
+
+html[data-theme="dark"] [class~="text-teal-600"] {
+  color: #5eead4;
+}
+
+html[data-theme="dark"] [class~="text-teal-700"] {
+  color: #99f6e4;
+}
+
+html[data-theme="dark"] [class~="text-teal-800"] {
+  color: #ccfbf1;
+}
+
+html[data-theme="dark"] [class~="text-emerald-500"] {
+  color: #34d399;
+}
+
+html[data-theme="dark"] [class~="text-violet-500"] {
+  color: #c4b5fd;
+}
+
+html[data-theme="dark"] [class~="text-red-500"],
+html[data-theme="dark"] [class~="text-red-700"] {
+  color: #f87171;
+}
+
+html[data-theme="dark"] [class~="text-red-800"] {
+  color: #fca5a5;
+}
+
+/* Borders */
+html[data-theme="dark"] [class~="border-[#E5E9DF]"],
+html[data-theme="dark"] [class~="border-[#E2E8F0]"],
+html[data-theme="dark"] [class~="border-[#DDE0D5]"],
+html[data-theme="dark"] [class~="border-[#E8E9E1]"] {
+  border-color: #2a3326;
+}
+
+html[data-theme="dark"] [class~="border-[#dce5ef]"] {
+  border-color: #1e3a38;
+}
+
+html[data-theme="dark"] [class~="border-[#42512C]/10"] {
+  border-color: rgb(185 214 161 / 0.12);
+}
+
+html[data-theme="dark"] [class~="border-[#42512C]/15"] {
+  border-color: rgb(185 214 161 / 0.16);
+}
+
+html[data-theme="dark"] [class~="border-[#42512C]/20"] {
+  border-color: rgb(185 214 161 / 0.2);
+}
+
+html[data-theme="dark"] [class~="border-[#42512C]/30"] {
+  border-color: rgb(185 214 161 / 0.28);
+}
+
+html[data-theme="dark"] [class~="border-[#647F52]"] {
+  border-color: #9bc27d;
+}
+
+html[data-theme="dark"] [class~="border-[#00A88E]"] {
+  border-color: #2dd4bf;
+}
+
+html[data-theme="dark"] [class~="border-black/5"] {
+  border-color: rgb(255 255 255 / 0.07);
+}
+
+html[data-theme="dark"] [class~="border-black/10"],
+html[data-theme="dark"] [class~="lg:border-black/10"] {
+  border-color: rgb(255 255 255 / 0.1);
+}
+
+html[data-theme="dark"] [class~="border-black/20"] {
+  border-color: rgb(255 255 255 / 0.16);
+}
+
+html[data-theme="dark"] [class~="border-gray-100"],
+html[data-theme="dark"] [class~="border-gray-200"],
+html[data-theme="dark"] [class~="border-slate-200"] {
+  border-color: #2a3326;
+}
+
+html[data-theme="dark"] [class~="border-teal-100"] {
+  border-color: #1e4b45;
+}
+
+html[data-theme="dark"] [class~="border-red-200"] {
+  border-color: #5a2a2a;
+}
+
+html[data-theme="dark"] [class~="border-red-300"] {
+  border-color: #7a3535;
+}
+
+/* Placeholders */
+html[data-theme="dark"] [class~="placeholder:text-slate-400"]::placeholder {
+  color: #7f8b78;
+}
+
+html[data-theme="dark"] [class~="placeholder:text-[#92968B]"]::placeholder,
+html[data-theme="dark"] [class~="placeholder-[#94A3B8]"]::placeholder {
+  color: #7f8b78;
+}
+
+/* Hover states */
+html[data-theme="dark"] [class~="hover:bg-[#344222]"]:hover,
+html[data-theme="dark"] [class~="hover:bg-[#344223]"]:hover {
+  background-color: #648351;
+}
+
+html[data-theme="dark"] [class~="hover:bg-[#42512C]/5"]:hover {
+  background-color: rgb(185 214 161 / 0.08);
+}
+
+html[data-theme="dark"] [class~="hover:bg-[#42512C]/10"]:hover {
+  background-color: rgb(185 214 161 / 0.12);
+}
+
+html[data-theme="dark"] [class~="hover:bg-[#F7F9F4]"]:hover {
+  background-color: #1a2116;
+}
+
+html[data-theme="dark"] [class~="hover:bg-[#F9F9F2]"]:hover,
+html[data-theme="dark"] [class~="hover:bg-white"]:hover {
+  background-color: #1c2418;
+}
+
+html[data-theme="dark"] [class~="hover:bg-teal-50"]:hover {
+  background-color: #0f2a26;
+}
+
+html[data-theme="dark"] [class~="hover:bg-emerald-50"]:hover {
+  background-color: #10231a;
+}
+
+html[data-theme="dark"] [class~="hover:bg-violet-50"]:hover {
+  background-color: #1e1a2e;
+}
+
+html[data-theme="dark"] [class~="hover:bg-red-50"]:hover {
+  background-color: #2a1515;
+}
+
+html[data-theme="dark"] [class~="hover:border-[#42512C]/30"]:hover {
+  border-color: rgb(185 214 161 / 0.28);
+}
+
+html[data-theme="dark"] [class~="hover:border-gray-400/70"]:hover {
+  border-color: #4a5545;
+}
+
+html[data-theme="dark"] [class~="hover:text-[#1C2012]"]:hover,
+html[data-theme="dark"] [class~="hover:text-[#0F172A]"]:hover {
+  color: #f4f8ef;
+}
+
+html[data-theme="dark"] [class~="hover:text-[#42512C]"]:hover,
+html[data-theme="dark"] [class~="hover:text-[#344222]"]:hover {
+  color: #d4e9c4;
+}
+
+html[data-theme="dark"] [class~="hover:text-[#647F52]"]:hover {
+  color: #b8d9a0;
+}
+
+html[data-theme="dark"] [class~="hover:text-[#00A88E]"]:hover {
+  color: #5eead4;
+}
+
+html[data-theme="dark"] [class~="hover:text-teal-600"]:hover {
+  color: #5eead4;
+}
+
+html[data-theme="dark"] [class~="hover:text-emerald-600"]:hover {
+  color: #6ee7b7;
+}
+
+html[data-theme="dark"] [class~="hover:text-violet-600"]:hover {
+  color: #c4b5fd;
+}
+
+html[data-theme="dark"] [class~="hover:text-red-800"]:hover {
+  color: #fca5a5;
+}
+
+/* Focus states */
+html[data-theme="dark"] [class~="focus:bg-white"]:focus {
+  background-color: #1b2318;
+}
+
+html[data-theme="dark"] [class~="focus:border-[#647F52]"]:focus {
+  border-color: #9bc27d;
+}
+
+html[data-theme="dark"] [class~="focus:border-[#00A88E]"]:focus,
+html[data-theme="dark"] [class~="focus:border-[#009E91]"]:focus {
+  border-color: #2dd4bf;
+}
+
+html[data-theme="dark"] [class~="focus-visible:border-[#647F52]"]:focus-visible {
+  border-color: #9bc27d;
+}
+
+html[data-theme="dark"] [class~="focus-visible:outline-[#647F52]"]:focus-visible {
+  outline-color: #9bc27d;
+}
+
+html[data-theme="dark"] [class~="border-[#00A88E]/20"] {
+  border-color: rgb(45 212 191 / 0.25);
+}
+
+/* Group hover states */
+html[data-theme="dark"]
+  .group:hover
+  [class~="group-hover:text-[#647F52]"] {
+  color: #9bc27d;
+}
+
+html[data-theme="dark"]
+  .group:hover
+  [class~="group-hover:text-gray-600"] {
+  color: #a8b3a0;
+}
+
+/* Red accents */
+html[data-theme="dark"] [class~="ring-red-100"] {
+  --tw-ring-color: #4a2020;
+}

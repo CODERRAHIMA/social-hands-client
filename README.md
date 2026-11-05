@@ -75,6 +75,4 @@ The project uses Vercel for deployment.
 Social Hands aims to encourage community participation by making social development initiatives more accessible. By bringing event organizers and volunteers together on a single platform, it helps turn small community efforts into meaningful collective impact.
 
 ---
-**Live link: https://social-hands-client.vercel.app/ **
-
 **Built with ❤️ to connect communities and inspire positive change.** 🌱
