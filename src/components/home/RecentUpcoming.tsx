@@ -2,7 +2,7 @@ import EventCard from "@/components/shared/EventCard";
 import { IEvent } from "@/lib/eventType";
 
 export default async function RecentUpcoming() {
-  const res = await fetch("http://localhost:8000/recent-events");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recent-events`);
   const data = await res.json();
 
   return (

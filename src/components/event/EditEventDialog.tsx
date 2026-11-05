@@ -64,7 +64,7 @@ export function EditEventDialog({ event }: { event: IEvent }) {
     const token = await getTokenFromClient();
 
     try {
-      const res = await fetch(`http://localhost:8000/upcoming-events/${event._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upcoming-events/${event._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

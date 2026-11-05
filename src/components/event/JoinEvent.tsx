@@ -20,7 +20,7 @@ const JoinEvent = ({ event }: { event: IEvent }) => {
     if (!user) return router.push(`/sign-in?redirectTo=${pathname}`);
 
     try {
-      const res = await fetch("http://localhost:8000/joined-events", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/joined-events`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: user?.name, email: user?.email, userimage: user?.image, ...event }),

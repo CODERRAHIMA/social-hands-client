@@ -21,7 +21,7 @@ export function DeleteEventDialog({ id }: { id: string }) {
   const handleDeleteEvent = async () => {
     const token = await getTokenFromClient();
     try {
-      const res = await fetch(`http://localhost:8000/upcoming-events/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upcoming-events/${id}`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${token}`,

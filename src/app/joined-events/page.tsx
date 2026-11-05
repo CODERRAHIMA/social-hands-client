@@ -14,7 +14,7 @@ const JoinedEventsPage = async () => {
   const token = await getTokenFromServer();
 
   const res = await fetch(
-    `http://localhost:8000/joined-events/${user?.email}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/joined-events/${user?.email}`,
     {
       headers: {
         authorization: `Bearer ${token}`,
