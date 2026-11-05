@@ -75,7 +75,7 @@ export default function SignInPage() {
   }
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#F7F6F1] px-3 pb-12 pt-24 dark:bg-[#071E07] min-[380px]:px-4 sm:px-6 sm:pb-16 sm:pt-32">
+    <section className="relative isolate overflow-hidden bg-[#F7F6F1] px-3 pb-12 pt-24 my-12 sm:my-0 dark:bg-[#071E07] min-[380px]:px-4 sm:px-6 sm:pb-16 sm:pt-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-32 top-28 -z-10 size-80 rounded-full bg-[#647F52]/12 blur-3xl dark:bg-lime-300/8"
