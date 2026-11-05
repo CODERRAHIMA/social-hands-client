@@ -5,6 +5,10 @@
 
 From donation campaigns and tree plantations to cleanup drives and educational programs, Social Hands makes it easier for communities to come together and create meaningful change.
 
+## 🌐 Live Demo
+
+🔗 **Live Website:** https://social-hands-client.vercel.app/
+
 ## ✨ Features
 
 - 🔎 **Discover Community Events:** Browse upcoming and recent social events with information such as event categories, dates, locations, and descriptions.
@@ -71,5 +75,6 @@ The project uses Vercel for deployment.
 Social Hands aims to encourage community participation by making social development initiatives more accessible. By bringing event organizers and volunteers together on a single platform, it helps turn small community efforts into meaningful collective impact.
 
 ---
+**Live link: https://social-hands-client.vercel.app/ **
 
 **Built with ❤️ to connect communities and inspire positive change.** 🌱
