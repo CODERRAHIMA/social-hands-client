@@ -42,8 +42,8 @@ export default function SignInPage() {
         return
       }
 
-      toast.success("Signed in successfully.")
       router.push(redirectTo)
+      toast.success("Signed in successfully.")
     } catch {
       toast.error("Unable to sign in right now. Please try again.")
     } finally {

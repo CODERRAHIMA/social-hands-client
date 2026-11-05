@@ -7,7 +7,6 @@ const client = new MongoClient(process.env.MONGO_URI as string);
 const db = client.db("socialHands");
 
 export const auth = betterAuth({
-  trustedOrigins: ["https://social-hands-client.vercel.app"],
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,
