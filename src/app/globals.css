@@ -5,7 +5,7 @@
 /* The app uses a data-theme attribute on <html> instead of a `.dark` class. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-:root {
+/* :root {
   color-scheme: light;
   --toast-bg: #ffffff;
   --toast-fg: #363636;
@@ -25,7 +25,7 @@ html[data-theme="dark"] {
 html[data-theme="dark"] body {
   background-color: #0b0f0a;
   color: #e8efe3;
-}
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   body {
@@ -43,7 +43,7 @@ html[data-theme="dark"] body {
 --------------------------------------------------------------------------- */
 
 /* App, cards and other light surfaces */
-html[data-theme="dark"] [class~="bg-[#F7F6F1]"] {
+/* html[data-theme="dark"] [class~="bg-[#F7F6F1]"] {
   background-color: #0b0f0a;
 }
 
@@ -143,7 +143,7 @@ html[data-theme="dark"] [class~="bg-[#647F52]"] {
 }
 
 /* Newsletter gradient */
-html[data-theme="dark"] [class~="from-[#dff5f2]"] {
+/* html[data-theme="dark"] [class~="from-[#dff5f2]"] {
   --tw-gradient-from: #10201d;
 }
 
@@ -153,10 +153,10 @@ html[data-theme="dark"] [class~="via-white"] {
 
 html[data-theme="dark"] [class~="to-[#e4f5f0]"] {
   --tw-gradient-to: #0f1f1a;
-}
+} */
 
 /* Text */
-html[data-theme="dark"] [class~="text-[#26351f]"],
+/* html[data-theme="dark"] [class~="text-[#26351f]"],
 html[data-theme="dark"] [class~="text-[#26351F]"],
 html[data-theme="dark"] [class~="text-[#1C2012]"],
 html[data-theme="dark"] [class~="text-[#0F172A]"],
@@ -310,7 +310,7 @@ html[data-theme="dark"] [class~="text-red-800"] {
 }
 
 /* Borders */
-html[data-theme="dark"] [class~="border-[#E5E9DF]"],
+/* html[data-theme="dark"] [class~="border-[#E5E9DF]"],
 html[data-theme="dark"] [class~="border-[#E2E8F0]"],
 html[data-theme="dark"] [class~="border-[#DDE0D5]"],
 html[data-theme="dark"] [class~="border-[#E8E9E1]"] {
@@ -377,7 +377,7 @@ html[data-theme="dark"] [class~="border-red-300"] {
 }
 
 /* Placeholders */
-html[data-theme="dark"] [class~="placeholder:text-slate-400"]::placeholder {
+/* html[data-theme="dark"] [class~="placeholder:text-slate-400"]::placeholder {
   color: #7f8b78;
 }
 
@@ -386,7 +386,6 @@ html[data-theme="dark"] [class~="placeholder-[#94A3B8]"]::placeholder {
   color: #7f8b78;
 }
 
-/* Hover states */
 html[data-theme="dark"] [class~="hover:bg-[#344222]"]:hover,
 html[data-theme="dark"] [class~="hover:bg-[#344223]"]:hover {
   background-color: #648351;
@@ -467,7 +466,7 @@ html[data-theme="dark"] [class~="hover:text-red-800"]:hover {
   color: #fca5a5;
 }
 
-/* Focus states */
+
 html[data-theme="dark"] [class~="focus:bg-white"]:focus {
   background-color: #1b2318;
 }
@@ -491,10 +490,10 @@ html[data-theme="dark"] [class~="focus-visible:outline-[#647F52]"]:focus-visible
 
 html[data-theme="dark"] [class~="border-[#00A88E]/20"] {
   border-color: rgb(45 212 191 / 0.25);
-}
+} */
 
 /* Group hover states */
-html[data-theme="dark"]
+/* html[data-theme="dark"]
   .group:hover
   [class~="group-hover:text-[#647F52]"] {
   color: #9bc27d;
@@ -504,9 +503,9 @@ html[data-theme="dark"]
   .group:hover
   [class~="group-hover:text-gray-600"] {
   color: #a8b3a0;
-}
+} */
 
 /* Red accents */
-html[data-theme="dark"] [class~="ring-red-100"] {
+/* html[data-theme="dark"] [class~="ring-red-100"] {
   --tw-ring-color: #4a2020;
-}
+} */

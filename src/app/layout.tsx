@@ -35,16 +35,37 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#F7F6F1]">
+      <body className="flex min-h-full flex-col bg-[#F7F6F1] text-[#26351F] dark:bg-[#071E07] dark:text-stone-100">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <Toaster
           position="top-right"
+          containerStyle={{ zIndex: 99999 }}
           toastOptions={{
             style: {
-              background: "var(--toast-bg)",
-              color: "var(--toast-fg)",
+              background: "#26351F",
+              color: "#FFFFFF",
+            },
+            success: {
+              style: {
+                background: "#15803D",
+                color: "#FFFFFF",
+              },
+              iconTheme: {
+                primary: "#FFFFFF",
+                secondary: "#166534",
+              },
+            },
+            error: {
+              style: {
+                background: "#B91C1C",
+                color: "#FFFFFF",
+              },
+              iconTheme: {
+                primary: "#FFFFFF",
+                secondary: "#991B1B",
+              },
             },
           }}
         />

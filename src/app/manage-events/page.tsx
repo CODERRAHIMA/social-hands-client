@@ -25,29 +25,29 @@ const ManageEventsPage = async () => {
 
   return (
     <div className="mx-auto mt-20 max-w-7xl px-4 py-10 sm:px-6 sm:py-20">
-      <header className="mb-9 flex flex-col gap-6 border-b border-[#42512C]/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
+      <header className="mb-9 flex flex-col gap-6 border-b border-[#42512C]/10 pb-8 dark:border-white/10 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#42512C]/10 bg-white/80 px-3 py-1.5 text-xs font-semibold tracking-wide text-[#647F52] shadow-sm">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#42512C]/10 bg-white/80 px-3 py-1.5 text-xs font-semibold tracking-wide text-[#647F52] shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-lime-300">
             <ClipboardList className="h-4 w-4" />
             YOUR EVENTS
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#26351F] sm:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight text-[#26351F] dark:text-stone-100 sm:text-4xl">
             Manage Events
           </h1>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
+          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600 dark:text-stone-400 sm:text-base">
             Keep track of the events you&apos;ve created, all in one place.
           </p>
         </div>
         <div className="flex gap-2">
-          <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-[#42512C]/10 bg-white/80 px-4 py-3 text-sm font-medium text-[#42512C] shadow-sm">
-            <CalendarCheck2 className="h-4 w-4 text-[#647F52]" />
+          <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-[#42512C]/10 bg-white/80 px-4 py-3 text-sm font-medium text-[#42512C] shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-stone-200">
+            <CalendarCheck2 className="h-4 w-4 text-[#647F52] dark:text-lime-300" />
             <span>
               {events.length} {events.length === 1 ? "event" : "events"}
             </span>
           </div>
           <Link
             href="/add-event"
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#42512C] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#344222] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#647F52]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#42512C] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#344222] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#647F52] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200 dark:focus-visible:outline-lime-300"
           >
             <Plus className="h-4 w-4" />
             Create an event
@@ -64,19 +64,19 @@ const ManageEventsPage = async () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center rounded-2xl border border-dashed border-[#42512C]/20 bg-white/60 px-6 py-16 text-center">
-          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#42512C]/5 text-[#647F52]">
+        <div className="flex flex-col items-center rounded-2xl border border-dashed border-[#42512C]/20 bg-white/60 px-6 py-16 text-center dark:border-white/15 dark:bg-white/[0.03]">
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#42512C]/5 text-[#647F52] dark:bg-lime-300/10 dark:text-lime-300">
             <ClipboardList className="h-7 w-7" />
           </div>
-          <h2 className="text-lg font-semibold text-[#26351F]">
+          <h2 className="text-lg font-semibold text-[#26351F] dark:text-stone-100">
             No events to manage yet
           </h2>
-          <p className="mt-2 max-w-sm text-sm leading-6 text-slate-500">
+          <p className="mt-2 max-w-sm text-sm leading-6 text-slate-500 dark:text-stone-400">
             Create an event and it will appear here for you to manage.
           </p>
           <Link
             href="/add-event"
-            className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#42512C] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#344222] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#647F52]"
+            className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#42512C] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#344222] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#647F52] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200 dark:focus-visible:outline-lime-300"
           >
             <Plus className="h-4 w-4" />
             Create an event

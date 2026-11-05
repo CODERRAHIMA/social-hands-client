@@ -69,7 +69,6 @@ const stories: Story[] = [
     base: "row-span-2",
     lg: "row-span-2",
   },
-  
 ];
 
 const StoriesGallery = () => {
@@ -77,14 +76,14 @@ const StoriesGallery = () => {
     <section id="stories" className="py-24 sm:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-[#647F52]">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-[#647F52] dark:text-lime-300">
               Stories
             </p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-[#26351f] sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#26351F] dark:text-stone-100 sm:text-4xl lg:text-5xl">
               Moments from the community
             </h2>
-            <p className="mt-5 text-base leading-7 text-black/60 sm:text-lg">
+            <p className="mt-5 text-base leading-7 text-slate-600 dark:text-stone-400 sm:text-md">
               A gallery of the hands that showed up, the work that got done, and
               the people who made it happen.
             </p>
@@ -115,9 +114,6 @@ const StoriesGallery = () => {
                   </p>
                   <p className="truncate text-xs text-white/70">{author}</p>
                 </div>
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-                  <Heart aria-hidden="true" className="h-4 w-4" />
-                </span>
               </div>
             </li>
           ))}

@@ -43,8 +43,15 @@ const JoinEvent = ({ event }: { event: IEvent }) => {
   };
 
   return (
-    <Button onClick={handleJoinEvent} className={`flex-1 sm:flex-none ${isJoined ? "bg-teal-700" : "bg-teal-600"}`}>
-      <Heart size={16} />
+    <Button
+      onClick={handleJoinEvent}
+      className={`cursor-pointer h-11 flex-1 rounded-xl px-5 font-semibold shadow-md transition-all hover:-translate-y-0.5 focus-visible:ring-offset-2 sm:flex-none ${
+        isJoined
+          ? "bg-[#647F52] text-white shadow-[#42512C]/15 hover:bg-[#526942] dark:bg-[#263b21] dark:text-lime-200 dark:hover:bg-[#31492b]"
+          : "bg-[#42512C] text-white shadow-[#42512C]/20 hover:bg-[#344222] dark:bg-lime-300 dark:text-[#172313] dark:shadow-lime-300/10 dark:hover:bg-lime-200"
+      }`}
+    >
+      <Heart size={16} aria-hidden="true" />
       {isJoined ? "Joined (click to leave)" : "Join Event"}
     </Button>
   );

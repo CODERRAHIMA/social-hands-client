@@ -96,29 +96,29 @@ const CreateEventPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] py-12 px-4 flex flex-col items-center justify-center font-sans antialiased text-[#1E293B]">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#F7F6F1] px-4 py-12 mt-22 font-sans antialiased text-[#26351F] dark:bg-[#071E07] dark:text-stone-100">
       {/* Back Navigation Trigger */}
       <div className="w-full max-w-2xl mb-5 flex justify-start">
-        <button className="flex items-center gap-2 text-xs font-semibold text-[#64748B] hover:text-[#0F172A] transition-colors group">
+        <button className="group flex items-center gap-2 text-xs font-semibold text-[#64748B] transition-colors hover:text-[#0F172A] dark:text-stone-400 dark:hover:text-stone-100">
           <ArrowLeft className="h-3.5 w-3.5 transform group-hover:-translate-x-0.5 transition-transform" />
           Back to Upcoming Events
         </button>
       </div>
 
       {/* Main shadcn-styled Form Card Container */}
-      <div className="w-full max-w-2xl bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 shadow-sm">
+      <div className="w-full max-w-2xl rounded-2xl border border-[#E5E9DF] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#102110] sm:p-10">
         {/* Top Feature Badge */}
-        <div className="inline-flex items-center gap-1.5 bg-[#00A88E]/10 border border-[#00A88E]/20 text-[#008772] text-xs font-bold px-3 py-1 rounded-full mb-5 select-none">
-          <Sparkles className="h-3.5 w-3.5 text-[#00A88E]" />
+        <div className="mb-5 inline-flex select-none items-center gap-1.5 rounded-full border border-[#647F52]/20 bg-[#647F52]/10 px-3 py-1 text-xs font-bold text-[#42512C] dark:border-lime-300/20 dark:bg-lime-300/10 dark:text-lime-200">
+          <Sparkles className="h-3.5 w-3.5 text-[#647F52] dark:text-lime-300" />
           Social Service Drive
         </div>
 
         {/* Heading Header Group */}
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0F172A] mb-2">
+          <h1 className="mb-2 text-2xl font-extrabold tracking-tight text-[#26351F] dark:text-stone-100 sm:text-3xl">
             Create a Community Event
           </h1>
-          <p className="text-sm text-[#64748B]">
+          <p className="text-sm text-[#64748B] dark:text-stone-400">
             Organize a local relief effort, environmental cleanup, or community
             support drive.
           </p>
@@ -128,11 +128,11 @@ const CreateEventPage = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Form Segment: Event Title */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-              Event Title <span className="text-[#00A88E]">*</span>
+            <label className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
+              Event Title <span className="text-[#647F52] dark:text-lime-300">*</span>
             </label>
             <div className="relative">
-              <Type className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+              <Type className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8] dark:text-stone-500" />
               <input
                 type="text"
                 name="title"
@@ -140,7 +140,7 @@ const CreateEventPage = () => {
                 onChange={handleInputChange}
                 required
                 placeholder="e.g. Winter Clothes Distribution – Mirpur 10, Dhaka"
-                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all"
+                className="w-full rounded-xl border border-[#E2E8F0] bg-[#FDFCFA] py-3 pl-11 pr-4 text-sm text-[#26351F] placeholder:text-[#94A3B8] transition-all focus:border-[#647F52] focus:outline-none focus:ring-2 focus:ring-[#647F52]/20 dark:border-white/10 dark:bg-[#172617] dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-lime-300 dark:focus:ring-lime-300/20"
               />
             </div>
           </div>
@@ -149,16 +149,16 @@ const CreateEventPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* Form Segment: Event Type */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-                Event Type <span className="text-[#00A88E]">*</span>
+              <label className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
+                Event Type <span className="text-[#647F52] dark:text-lime-300">*</span>
               </label>
               <div className="relative">
-                <Tag className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                <Tag className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8] dark:text-stone-500" />
                 <select
                   name="eventType"
                   value={formData.eventType}
                   onChange={handleInputChange}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-10 py-3 text-sm text-[#0F172A] appearance-none focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all cursor-pointer"
+                  className="w-full cursor-pointer appearance-none rounded-xl border border-[#E2E8F0] bg-[#FDFCFA] py-3 pl-11 pr-10 text-sm text-[#26351F] transition-all focus:border-[#647F52] focus:outline-none focus:ring-2 focus:ring-[#647F52]/20 dark:border-white/10 dark:bg-[#172617] dark:text-stone-100 dark:focus:border-lime-300 dark:focus:ring-lime-300/20"
                 >
                   <option value="Donation">Donation</option>
                   <option value="Cleanup">Cleanup</option>
@@ -168,17 +168,17 @@ const CreateEventPage = () => {
                   <option value="Health Camp">Health Camp</option>
                   <option value="Education">Education</option>
                 </select>
-                <ChevronDown className="absolute right-4 top-4 h-3.5 w-3.5 text-[#94A3B8] pointer-events-none" />
+                <ChevronDown className="pointer-events-none absolute right-4 top-4 h-3.5 w-3.5 text-[#94A3B8] dark:text-stone-500" />
               </div>
             </div>
 
             {/* Form Segment: Event Date */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-                Event Date <span className="text-[#00A88E]">*</span>
+              <label className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
+                Event Date <span className="text-[#647F52] dark:text-lime-300">*</span>
               </label>
               <div className="relative">
-                <Calendar className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+                <Calendar className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8] dark:text-stone-500" />
                 <input
                   type="date"
                   name="eventDate"
@@ -186,10 +186,10 @@ const CreateEventPage = () => {
                   onChange={handleInputChange}
                   min={minEventDate}
                   required
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all cursor-pointer"
+                  className="w-full cursor-pointer rounded-xl border border-[#E2E8F0] bg-[#FDFCFA] py-3 pl-11 pr-4 text-sm text-[#26351F] transition-all focus:border-[#647F52] focus:outline-none focus:ring-2 focus:ring-[#647F52]/20 dark:border-white/10 dark:bg-[#172617] dark:text-stone-100 dark:focus:border-lime-300 dark:focus:ring-lime-300/20"
                 />
               </div>
-              <p className="text-[11px] text-[#64748B] tracking-wide mt-1 pl-1">
+              <p className="mt-1 pl-1 text-[11px] tracking-wide text-[#64748B] dark:text-stone-400">
                 Dates must be in the future
               </p>
             </div>
@@ -197,11 +197,11 @@ const CreateEventPage = () => {
 
           {/* Form Segment: Location Area */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-[#475569] flex items-center gap-1">
-              Location / Venue <span className="text-[#00A88E]">*</span>
+            <label className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
+              Location / Venue <span className="text-[#647F52] dark:text-lime-300">*</span>
             </label>
             <div className="relative">
-              <MapPin className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+              <MapPin className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8] dark:text-stone-500" />
               <input
                 type="text"
                 name="location"
@@ -209,18 +209,18 @@ const CreateEventPage = () => {
                 onChange={handleInputChange}
                 required
                 placeholder="e.g. Mohammadpur Town Hall, Dhaka"
-                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all"
+                className="w-full rounded-xl border border-[#E2E8F0] bg-[#FDFCFA] py-3 pl-11 pr-4 text-sm text-[#26351F] placeholder:text-[#94A3B8] transition-all focus:border-[#647F52] focus:outline-none focus:ring-2 focus:ring-[#647F52]/20 dark:border-white/10 dark:bg-[#172617] dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-lime-300 dark:focus:ring-lime-300/20"
               />
             </div>
           </div>
 
           {/* Form Segment: Image Attachments */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-[#475569]">
-              Thumbnail Image URL <span className="text-[#00A88E]">*</span>
+            <label className="text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
+              Thumbnail Image URL <span className="text-[#647F52] dark:text-lime-300">*</span>
             </label>
             <div className="relative">
-              <ImageIcon className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+              <ImageIcon className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8] dark:text-stone-500" />
               <input
                 type="url"
                 name="image"
@@ -228,24 +228,24 @@ const CreateEventPage = () => {
                 onChange={handleInputChange}
                 required
                 placeholder="https://unsplash.com..."
-                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all"
+                className="w-full rounded-xl border border-[#E2E8F0] bg-[#FDFCFA] py-3 pl-11 pr-4 text-sm text-[#26351F] placeholder:text-[#94A3B8] transition-all focus:border-[#647F52] focus:outline-none focus:ring-2 focus:ring-[#647F52]/20 dark:border-white/10 dark:bg-[#172617] dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-lime-300 dark:focus:ring-lime-300/20"
               />
             </div>
 
             {/* Fast Presets Action Section */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs pt-1 pl-1">
-              <span className="text-[#64748B]">Quick photo presets:</span>
+              <span className="text-[#64748B] dark:text-stone-400">Quick photo presets:</span>
               <div className="flex items-center gap-1.5 flex-wrap">
                 {presets.map((preset, idx) => (
                   <button
                     type="button"
                     key={idx}
                     onClick={() => applyPreset(preset.url)}
-                    className="text-[#008772] hover:text-[#00A88E] font-semibold transition-colors hover:underline"
+                    className="font-semibold text-[#42512C] transition-colors hover:text-[#647F52] hover:underline dark:text-lime-300 dark:hover:text-lime-200"
                   >
                     {preset.name}
                     {idx < presets.length - 1 && (
-                      <span className="text-[#CBD5E1] no-underline inline-block ml-1.5">
+                      <span className="ml-1.5 inline-block text-[#CBD5E1] no-underline dark:text-stone-600">
                         |
                       </span>
                     )}
@@ -257,11 +257,11 @@ const CreateEventPage = () => {
 
           {/* Form Segment: Large Text Area Description */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-[#475569]">
-              Event Description <span className="text-[#00A88E]">*</span>
+            <label className="text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
+              Event Description <span className="text-[#647F52] dark:text-lime-300">*</span>
             </label>
             <div className="relative">
-              <FileText className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8]" />
+              <FileText className="absolute left-4 top-3.5 h-4 w-4 text-[#94A3B8] dark:text-stone-500" />
               <textarea
                 name="description"
                 value={formData.description}
@@ -269,17 +269,17 @@ const CreateEventPage = () => {
                 required
                 rows={4}
                 placeholder="Explain the purpose of the drive, volunteers required, items being distributed or tasks to complete..."
-                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-11 pr-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#00A88E]/20 focus:border-[#00A88E] bg-slate-50/50 transition-all resize-y min-h-[110px]"
+                className="min-h-[110px] w-full resize-y rounded-xl border border-[#E2E8F0] bg-[#FDFCFA] py-3 pl-11 pr-4 text-sm text-[#26351F] placeholder:text-[#94A3B8] transition-all focus:border-[#647F52] focus:outline-none focus:ring-2 focus:ring-[#647F52]/20 dark:border-white/10 dark:bg-[#172617] dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-lime-300 dark:focus:ring-lime-300/20"
               />
             </div>
           </div>
 
           {/* User Account Verification Meta Section */}
-          <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-5 py-4 flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-[#64748B] font-medium">
+          <div className="flex items-center justify-between rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] px-5 py-4 text-xs dark:border-white/10 dark:bg-[#172617] sm:text-sm">
+            <span className="font-medium text-[#64748B] dark:text-stone-400">
               Organizer Email attached:
             </span>
-            <span className="text-[#0F172A] font-bold tracking-wide">
+            <span className="font-bold tracking-wide text-[#26351F] dark:text-stone-100">
               {userEmail}
             </span>
           </div>
@@ -287,7 +287,7 @@ const CreateEventPage = () => {
           {/* Submission Main Button */}
           <button
             type="submit"
-            className="w-full bg-[#00A88E] hover:bg-[#008772] active:scale-[0.995] text-white font-bold text-sm py-4 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#42512C] px-4 py-4 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#344222] active:scale-[0.995] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200"
           >
             <PlusCircle className="h-4 w-4" />
             Publish Event
