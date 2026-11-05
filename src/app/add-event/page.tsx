@@ -96,9 +96,9 @@ const CreateEventPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#F7F6F1] px-4 py-12 mt-22 font-sans antialiased text-[#26351F] dark:bg-[#071E07] dark:text-stone-100">
+    <div className="mt-20 flex min-h-screen flex-col items-center justify-center bg-[#F7F6F1] px-3 py-8 font-sans antialiased text-[#26351F] dark:bg-[#071E07] dark:text-stone-100 min-[380px]:px-4 sm:py-12">
       {/* Back Navigation Trigger */}
-      <div className="w-full max-w-2xl mb-5 flex justify-start">
+      <div className="mb-4 flex w-full max-w-2xl justify-start sm:mb-5">
         <button className="group flex items-center gap-2 text-xs font-semibold text-[#64748B] transition-colors hover:text-[#0F172A] dark:text-stone-400 dark:hover:text-stone-100">
           <ArrowLeft className="h-3.5 w-3.5 transform group-hover:-translate-x-0.5 transition-transform" />
           Back to Upcoming Events
@@ -106,7 +106,7 @@ const CreateEventPage = () => {
       </div>
 
       {/* Main shadcn-styled Form Card Container */}
-      <div className="w-full max-w-2xl rounded-2xl border border-[#E5E9DF] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#102110] sm:p-10">
+      <div className="w-full max-w-2xl rounded-2xl border border-[#E5E9DF] bg-white p-4 shadow-sm dark:border-white/10 dark:bg-[#102110] min-[380px]:p-5 sm:p-10">
         {/* Top Feature Badge */}
         <div className="mb-5 inline-flex select-none items-center gap-1.5 rounded-full border border-[#647F52]/20 bg-[#647F52]/10 px-3 py-1 text-xs font-bold text-[#42512C] dark:border-lime-300/20 dark:bg-lime-300/10 dark:text-lime-200">
           <Sparkles className="h-3.5 w-3.5 text-[#647F52] dark:text-lime-300" />
@@ -115,7 +115,7 @@ const CreateEventPage = () => {
 
         {/* Heading Header Group */}
         <div className="mb-8">
-          <h1 className="mb-2 text-2xl font-extrabold tracking-tight text-[#26351F] dark:text-stone-100 sm:text-3xl">
+          <h1 className="mb-2 text-xl font-extrabold tracking-tight text-[#26351F] dark:text-stone-100 min-[380px]:text-2xl sm:text-3xl">
             Create a Community Event
           </h1>
           <p className="text-sm text-[#64748B] dark:text-stone-400">
@@ -125,7 +125,7 @@ const CreateEventPage = () => {
         </div>
 
         {/* Input Fields Content */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Form Segment: Event Title */}
           <div className="space-y-2">
             <label className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
@@ -146,7 +146,7 @@ const CreateEventPage = () => {
           </div>
 
           {/* Form Layout Grid Row: Type & Date Selector */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
             {/* Form Segment: Event Type */}
             <div className="space-y-2">
               <label className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#475569] dark:text-stone-300">
@@ -275,11 +275,11 @@ const CreateEventPage = () => {
           </div>
 
           {/* User Account Verification Meta Section */}
-          <div className="flex items-center justify-between rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] px-5 py-4 text-xs dark:border-white/10 dark:bg-[#172617] sm:text-sm">
+          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-4 text-xs dark:border-white/10 dark:bg-[#172617] sm:px-5 sm:text-sm">
             <span className="font-medium text-[#64748B] dark:text-stone-400">
               Organizer Email attached:
             </span>
-            <span className="font-bold tracking-wide text-[#26351F] dark:text-stone-100">
+            <span className="max-w-full break-all text-right font-bold tracking-wide text-[#26351F] dark:text-stone-100">
               {userEmail}
             </span>
           </div>
@@ -287,7 +287,7 @@ const CreateEventPage = () => {
           {/* Submission Main Button */}
           <button
             type="submit"
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#42512C] px-4 py-4 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#344222] active:scale-[0.995] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200"
+            className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#42512C] px-4 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#344222] active:scale-[0.995] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200 sm:py-4"
           >
             <PlusCircle className="h-4 w-4" />
             Publish Event

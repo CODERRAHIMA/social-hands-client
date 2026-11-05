@@ -16,8 +16,8 @@ const MyEventCard = ({
 }) => {
   return (
     <article className="group flex w-full flex-col overflow-hidden rounded-2xl border border-[#E5E9DF] bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#42512C]/10 dark:border-white/10 dark:bg-[#142414]">
-      <div className="flex min-w-0 flex-col gap-4 p-4 sm:gap-5 sm:p-5 md:flex-row md:items-center md:gap-6">
-        <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-2xl md:h-48 md:w-72 lg:w-80">
+      <div className="flex min-w-0 flex-col gap-3 p-3 min-[380px]:gap-4 min-[380px]:p-4 sm:gap-5 sm:p-5 md:flex-row md:items-center md:gap-6">
+        <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-2xl sm:h-48 md:h-48 md:w-72 lg:w-80">
           <Image
             src={event.image}
             alt={event.title}
@@ -27,9 +27,9 @@ const MyEventCard = ({
           />
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col gap-4 py-1">
-          <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-stone-300">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#42512C]/20 bg-[#42512C]/5 px-3 py-1.5 font-semibold text-[#42512C] dark:border-white/10 dark:bg-white/5 dark:text-lime-200">
+        <div className="flex min-w-0 flex-1 flex-col gap-3 py-1 sm:gap-4">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-stone-300 sm:gap-3 sm:text-sm">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#42512C]/20 bg-[#42512C]/5 px-2.5 py-1.5 font-semibold text-[#42512C] dark:border-white/10 dark:bg-white/5 dark:text-lime-200 sm:gap-2 sm:px-3">
               <CalendarDays className="h-4 w-4" />
               {new Date(event.eventDate).toLocaleDateString("en-US", {
                 month: "short",
@@ -37,14 +37,14 @@ const MyEventCard = ({
                 year: "numeric",
               })}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm font-medium text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-stone-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1.5 text-xs font-medium text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-stone-300 sm:px-3 sm:text-sm">
               <Tag className="h-4 w-4 text-[#647F52] dark:text-lime-300" />
               {event.eventType}
             </span>
           </div>
 
           <div>
-            <h2 className="text-xl font-bold tracking-tight text-[#26351F] dark:text-stone-100">
+            <h2 className="break-words text-lg font-bold tracking-tight text-[#26351F] dark:text-stone-100 sm:text-xl">
               {event.title}
             </h2>
             <p className="mt-2 line-clamp-2 text-sm leading-6 text-gray-500 dark:text-stone-400">

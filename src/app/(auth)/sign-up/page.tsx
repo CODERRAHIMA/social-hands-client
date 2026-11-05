@@ -101,7 +101,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#F7F6F1] px-4 pb-16 pt-28 dark:bg-[#071E07] sm:px-6 sm:pt-32">
+    <section className="relative isolate overflow-hidden bg-[#F7F6F1] px-3 pb-12 pt-24 dark:bg-[#071E07] min-[380px]:px-4 sm:px-6 sm:pb-16 sm:pt-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-32 top-28 -z-10 size-80 rounded-full bg-[#647F52]/12 blur-3xl dark:bg-lime-300/8"
@@ -111,7 +111,7 @@ export default function SignUpPage() {
         className="pointer-events-none absolute -right-32 bottom-8 -z-10 size-96 rounded-full bg-[#D9CBA7]/20 blur-3xl dark:bg-lime-300/6"
       />
 
-      <div className="mx-auto grid max-w-6xl overflow-hidden rounded-[2rem] border border-[#E5E9DF] bg-white shadow-[0_28px_90px_-40px_rgba(37,49,29,0.35)] dark:border-white/10 dark:bg-[#102110] dark:shadow-black/30 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mx-auto grid max-w-6xl overflow-hidden rounded-2xl border border-[#E5E9DF] bg-white shadow-[0_28px_90px_-40px_rgba(37,49,29,0.35)] dark:border-white/10 dark:bg-[#102110] dark:shadow-black/30 sm:rounded-[2rem] lg:grid-cols-[1.05fr_0.95fr]">
         <aside className="relative hidden min-h-[680px] flex-col justify-between overflow-hidden bg-[#344223] p-8 text-white lg:flex lg:p-12">
           <Image
             src="/bannerImg.jpg"
@@ -177,22 +177,22 @@ export default function SignUpPage() {
           </div>
         </aside>
 
-        <div className="flex items-center justify-center px-6 py-10 sm:px-10 sm:py-12 lg:px-14">
+        <div className="flex items-center justify-center px-4 py-8 min-[380px]:px-6 sm:px-10 sm:py-12 lg:px-14">
           <div className="w-full max-w-md">
             <div className="mb-8">
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#647F52] dark:text-lime-300">
                 Your next good thing starts here
               </p>
-              <h2 className="text-3xl font-extrabold tracking-tight text-[#1C2012] dark:text-stone-100 sm:text-4xl">
+              <h2 className="text-2xl font-extrabold tracking-tight text-[#1C2012] dark:text-stone-100 sm:text-4xl">
                 Create your account
               </h2>
-              <p className="mt-3 text-base leading-7 text-[#64695D] dark:text-stone-400">
+              <p className="mt-3 text-sm leading-6 text-[#64695D] dark:text-stone-400 sm:text-base sm:leading-7">
                 Join SocialHands and find meaningful ways to get involved.
               </p>
             </div>
 
             <form onSubmit={handleSignUp}>
-              <FieldGroup className="gap-5">
+              <FieldGroup className="gap-4 sm:gap-5">
                 <Field>
                   <FieldLabel
                     htmlFor="name"
@@ -287,7 +287,7 @@ export default function SignUpPage() {
                 <Field className="pt-1">
                   <Button
                     type="submit"
-                    className="h-12 w-full rounded-xl bg-[#42512C] text-sm font-bold text-white shadow-lg shadow-[#42512C]/20 hover:bg-[#344223] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200"
+                    className="h-11 w-full rounded-xl bg-[#42512C] text-sm font-bold text-white shadow-lg shadow-[#42512C]/20 hover:bg-[#344223] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200 sm:h-12"
                   >
                     Create account
                     <ArrowRight size={17} aria-hidden="true" />
@@ -309,7 +309,7 @@ export default function SignUpPage() {
               variant="outline"
               onClick={handleGoogleSignIn}
               disabled={pending !== null}
-              className="cursor-pointer h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2] dark:border-white/10 dark:bg-white/5 dark:text-stone-200 dark:hover:bg-white/10"
+              className="cursor-pointer h-11 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2] dark:border-white/10 dark:bg-white/5 dark:text-stone-200 dark:hover:bg-white/10 sm:h-12"
             >
               <Image
                 src="/google.png"

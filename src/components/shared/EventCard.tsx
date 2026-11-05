@@ -7,7 +7,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#E5E9DF] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#42512C]/10 dark:border-white/10 dark:bg-[#142414]">
       {/* Image */}
-      <div className="relative h-52 w-full overflow-hidden">
+      <div className="relative h-48 w-full overflow-hidden sm:h-52">
         <Image
           src={event.image}
           alt={event.title}
@@ -24,7 +24,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col gap-4 p-5">
+      <div className="flex flex-1 flex-col gap-3 p-4 sm:gap-4 sm:p-5">
         <div className="flex w-fit items-center gap-2 rounded-lg border border-[#42512C]/20 bg-[#42512C]/5 px-3 py-2 text-[13px] font-bold text-[#42512C] dark:border-white/10 dark:bg-white/5 dark:text-stone-200">
           <CalendarDays className="h-4 w-4" />
           {new Date(event.eventDate).toLocaleDateString("en-US", {
@@ -35,7 +35,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
           })}
         </div>
         <div>
-          <h3 className="text-lg font-bold tracking-tight text-[#26351F] transition-colors group-hover:text-[#647F52] dark:text-stone-100 dark:group-hover:text-lime-200">
+          <h3 className="break-words text-base font-bold tracking-tight text-[#26351F] transition-colors group-hover:text-[#647F52] dark:text-stone-100 dark:group-hover:text-lime-200 sm:text-lg">
             {event.title}
           </h3>
 

@@ -91,7 +91,7 @@ export function EditEventDialog({ event }: { event: IEvent }) {
         render={
           <Button
             variant="outline"
-            className="flex-1 sm:flex-none h-11 w-full justify-center rounded-xl border-[#42512C]/20 bg-white px-4 py-1 sm:py-0 font-semibold text-[#42512C] shadow-sm transition-all hover:border-[#42512C]/30 hover:bg-[#42512C]/5 hover:text-[#344222] focus-visible:ring-[#647F52]/30 dark:border-white/15 dark:bg-white/5 dark:text-lime-200 dark:hover:border-lime-300/30 dark:hover:bg-lime-300/10 dark:hover:text-lime-100 dark:focus-visible:ring-lime-300/30 sm:w-auto lg:w-full"
+            className="flex-1 sm:flex-none h-11 w-full justify-center rounded-xl border-[#42512C]/20 bg-white px-3 py-1 text-sm font-semibold text-[#42512C] shadow-sm transition-all hover:border-[#42512C]/30 hover:bg-[#42512C]/5 hover:text-[#344222] focus-visible:ring-[#647F52]/30 dark:border-white/15 dark:bg-white/5 dark:text-lime-200 dark:hover:border-lime-300/30 dark:hover:bg-lime-300/10 dark:hover:text-lime-100 dark:focus-visible:ring-lime-300/30 sm:w-auto sm:px-4 sm:py-0 lg:w-full"
           >
             <Pencil className="h-4 w-4" />
             Edit
@@ -245,7 +245,7 @@ export function EditEventDialog({ event }: { event: IEvent }) {
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-10 rounded-xl border-[#E5E9DF] px-5 font-semibold text-slate-600 hover:bg-[#F7F9F4] hover:text-[#344222] dark:border-white/10 dark:text-stone-300 dark:hover:bg-white/5 dark:hover:text-lime-200"
+                  className="h-11 rounded-xl border-[#E5E9DF] px-4 font-semibold text-slate-600 hover:bg-[#F7F9F4] hover:text-[#344222] dark:border-white/10 dark:text-stone-300 dark:hover:bg-white/5 dark:hover:text-lime-200 sm:h-10 sm:px-5"
                 >
                   Cancel
                 </Button>
@@ -255,7 +255,7 @@ export function EditEventDialog({ event }: { event: IEvent }) {
               render={
                 <Button
                   type="submit"
-                  className="h-10 rounded-xl bg-[#42512C] px-5 font-semibold text-white shadow-sm transition-colors hover:bg-[#344222] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200"
+                  className="h-11 rounded-xl bg-[#42512C] px-4 font-semibold text-white shadow-sm transition-colors hover:bg-[#344222] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200 sm:h-10 sm:px-5"
                 >
                   Save changes
                 </Button>

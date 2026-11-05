@@ -8,11 +8,11 @@ export default async function UpcomingEventsPage() {
     const upcomingEvents = await res.json();
 
     return (
-        <div className='mx-auto max-w-7xl py-10'>
-            <h1 className='mt-28 text-center text-3xl font-bold text-[#26351F] dark:text-stone-100'>
+        <div className='mx-auto max-w-7xl px-3 py-8 min-[380px]:px-4 sm:py-10'>
+            <h1 className='mt-24 text-center text-2xl font-bold text-[#26351F] dark:text-stone-100 sm:mt-28 sm:text-3xl'>
                 Upcoming Events
             </h1>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 px-4'>
+            <div className='mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3'>
                 {upcomingEvents.map((event: IEvent) => (
                     <div key={event._id} className="h-full">
                         <EventCard event={event} />

@@ -28,12 +28,12 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F7F6F1] via-[#fbfbf8] to-white px-4 py-12 dark:from-[#071E07] dark:via-[#0b190b] dark:to-[#0a140a] sm:px-6 sm:py-16">
+    <div className="min-h-screen bg-gradient-to-b from-[#F7F6F1] via-[#fbfbf8] to-white px-3 py-10 dark:from-[#071E07] dark:via-[#0b190b] dark:to-[#0a140a] min-[380px]:px-4 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-6xl">
         {/* Back Button */}
         <Link
           href="/upcoming-events"
-          className="mb-6 mt-22 inline-flex items-center gap-2 rounded-full border border-[#647F52]/15 bg-white/70 px-4 py-2.5 text-sm font-medium text-slate-600 shadow-sm transition hover:border-[#647F52]/35 hover:text-[#42512C] dark:border-white/10 dark:bg-white/5 dark:text-stone-300 dark:hover:border-lime-300/30 dark:hover:text-lime-200 sm:mb-8"
+          className="mb-6 mt-22 inline-flex items-center gap-1.5 rounded-full border border-[#647F52]/15 bg-white/70 px-3 py-2.5 text-xs font-medium text-slate-600 shadow-sm transition hover:border-[#647F52]/35 hover:text-[#42512C] dark:border-white/10 dark:bg-white/5 dark:text-stone-300 dark:hover:border-lime-300/30 dark:hover:text-lime-200 min-[380px]:gap-2 min-[380px]:px-4 min-[380px]:text-sm sm:mb-8"
         >
           <ArrowLeft size={16} />
           Back to Upcoming Events
@@ -42,7 +42,7 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
         {/* Main Card */}
         <div className="overflow-hidden rounded-[1.75rem] border border-stone-200/80 bg-white shadow-[0_30px_90px_-35px_rgba(27,39,20,0.3)] dark:border-white/10 dark:bg-[#102110] dark:shadow-black/30">
           {/* Event Banner */}
-          <div className="relative h-72 sm:h-80 md:h-[26rem]">
+          <div className="relative h-64 min-[380px]:h-72 sm:h-80 md:h-[26rem]">
             <Image
               src={event.image}
               alt={event.title}
@@ -56,27 +56,27 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#10190f]/35 via-transparent to-transparent" />
 
             {/* Event Type */}
-            <div className="absolute left-5 top-5 sm:left-7 sm:top-7">
-              <Badge className="gap-2 rounded-full border border-white/30 bg-white/95 px-4 py-2 text-[#42512C] shadow-lg shadow-black/10 hover:bg-white dark:border-lime-200/20 dark:bg-[#172615]/90 dark:text-lime-200 dark:hover:bg-[#172615]">
+            <div className="absolute left-4 top-4 sm:left-7 sm:top-7">
+              <Badge className="gap-1.5 rounded-full border border-white/30 bg-white/95 px-3 py-1.5 text-xs text-[#42512C] shadow-lg shadow-black/10 hover:bg-white dark:border-lime-200/20 dark:bg-[#172615]/90 dark:text-lime-200 dark:hover:bg-[#172615] sm:gap-2 sm:px-4 sm:py-2">
                 <Heart size={13} aria-hidden="true" />
                 {event.eventType}
               </Badge>
             </div>
 
             {/* Event Title */}
-            <div className="absolute bottom-6 left-5 right-5 text-white sm:bottom-8 sm:left-8 sm:right-8">
-              <h1 className="mb-4 max-w-4xl text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+            <div className="absolute bottom-5 left-4 right-4 text-white sm:bottom-8 sm:left-8 sm:right-8">
+              <h1 className="mb-3 max-w-4xl break-words text-2xl font-extrabold leading-tight tracking-tight min-[380px]:text-3xl sm:mb-4 sm:text-4xl md:text-5xl">
                 {event.title}
               </h1>
 
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-stone-100">
-                <span className="flex items-center gap-2">
-                  <MapPin size={15} />
-                  {event.location}
+                <span className="flex min-w-0 items-center gap-2 text-xs sm:text-sm">
+                  <MapPin size={15} className="shrink-0" />
+                  <span className="break-words">{event.location}</span>
                 </span>
 
-                <span className="flex items-center gap-2">
-                  <CalendarDays size={15} />
+                <span className="flex items-center gap-2 text-xs sm:text-sm">
+                  <CalendarDays size={15} className="shrink-0" />
                   {formattedDate}
                 </span>
               </div>
@@ -84,29 +84,29 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
           </div>
 
           {/* Content */}
-          <div className="p-5 sm:p-7 md:p-9">
+          <div className="p-4 min-[380px]:p-5 sm:p-7 md:p-9">
             {/* Join Event Bar */}
-            <div className="mb-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[#647F52]/15 bg-gradient-to-r from-[#f3f6ed] to-[#f8faf5] p-4 dark:border-white/10 dark:from-[#172617] dark:to-[#142214] sm:flex-row sm:items-center sm:p-5">
+            <div className="mb-8 flex flex-col items-start justify-between gap-3 rounded-2xl border border-[#647F52]/15 bg-gradient-to-r from-[#f3f6ed] to-[#f8faf5] p-3 dark:border-white/10 dark:from-[#172617] dark:to-[#142214] min-[380px]:gap-4 min-[380px]:p-4 sm:flex-row sm:items-center sm:p-5">
               <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-[#647F52]/10 p-3 text-[#42512C] dark:bg-lime-300/10 dark:text-lime-300">
-                  <Users size={22} />
+                <div className="rounded-xl bg-[#647F52]/10 p-2.5 text-[#42512C] dark:bg-lime-300/10 dark:text-lime-300 sm:p-3">
+                  <Users size={20} className="sm:h-[22px] sm:w-[22px]" />
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-bold text-slate-800 dark:text-stone-100">
+                  <h3 className="text-xs font-bold text-slate-800 dark:text-stone-100 min-[380px]:text-sm">
                     Be Part of This Initiative
                   </h3>
-                  <p className="mt-1 text-xs text-slate-600 dark:text-stone-400">
+                  <p className="mt-1 text-[11px] text-slate-600 dark:text-stone-400 min-[380px]:text-xs">
                     Join us and make a positive difference.
                   </p>
                 </div>
               </div>
 
-              <div className="flex w-full items-center gap-3 sm:w-auto">
+              <div className="flex w-full items-center gap-2 min-[380px]:gap-3 sm:w-auto">
                 <Button
                   variant="outline"
                   size="icon"
-                  className="shrink-0 border-stone-200 bg-white text-slate-700 hover:bg-stone-50 dark:border-white/15 dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10"
+                  className="h-11 w-11 shrink-0 border-stone-200 bg-white text-slate-700 hover:bg-stone-50 dark:border-white/15 dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10 sm:h-8 sm:w-8"
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.href)
                       .then(() => toast.success("Event link copied."))
@@ -121,14 +121,14 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
             </div>
 
             {/* Details and Sidebar */}
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-9">
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3 md:gap-9">
               {/* Left Content */}
               <div className="md:col-span-2">
-                <h2 className="mb-3 text-xl font-extrabold tracking-tight text-slate-900 dark:text-stone-100">
+                <h2 className="mb-3 text-lg font-extrabold tracking-tight text-slate-900 dark:text-stone-100 sm:text-xl">
                   About This Initiative
                 </h2>
 
-                <p className="mb-8 text-sm leading-7 text-slate-600 dark:text-stone-300 sm:text-base">
+                <p className="mb-8 break-words text-sm leading-7 text-slate-600 dark:text-stone-300 sm:text-base">
                   {event.description}
                 </p>
 
@@ -169,7 +169,7 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
               {/* Right Sidebar */}
               <div className="space-y-5">
                 {/* Event Details */}
-                <Card className="rounded-2xl border-stone-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#142414]">
+                <Card className="min-w-0 rounded-2xl border-stone-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#142414]">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-xs font-bold uppercase tracking-[0.14em] text-[#647F52] dark:text-lime-300">
                       Event Details

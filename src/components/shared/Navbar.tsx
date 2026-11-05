@@ -104,10 +104,10 @@ const Navbar = () => {
   return (
     <nav
       aria-label="Main navigation"
-      className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5"
+      className="fixed inset-x-0 top-0 z-50 px-2 pt-2 min-[380px]:px-3 sm:px-6 sm:pt-5"
     >
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-[28px] border px-4 text-[#26351F] backdrop-blur-xl transition-all duration-300 sm:px-6 ${
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-2 rounded-[24px] border px-3 text-[#26351F] backdrop-blur-xl transition-all duration-300 min-[380px]:gap-3 sm:gap-4 sm:rounded-[28px] sm:px-6 ${
           scrolled
             ? "border-[#6E8649] bg-[#6E8649] py-2 shadow-xl shadow-black/15 dark:border-white/10 dark:bg-[#26351F] dark:shadow-black/30"
             : "border-[#6E8649] bg-[#6E8649] py-3 shadow-lg shadow-black/5 dark:border-white/10 dark:bg-[#26351F] dark:shadow-black/30"
@@ -116,16 +116,16 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 rounded-full outline-none focus-visible:ring-3 focus-visible:ring-[#647F52]/40"
+          className="flex min-w-0 shrink items-center gap-2 rounded-full outline-none focus-visible:ring-3 focus-visible:ring-[#647F52]/40 sm:shrink-0 sm:gap-2.5"
         >
           <Image
             src="/shlogo.jpg"
             alt="SocialHands logo"
             width={40}
             height={40}
-            className="h-10 w-10 rounded-full object-cover"
+            className="h-8 w-8 rounded-full object-cover sm:h-10 sm:w-10"
           />
-          <span className="text-xl font-extrabold tracking-tight text-[#F7F6F1] dark:text-lime-200">
+          <span className="truncate text-base font-extrabold tracking-tight text-[#F7F6F1] dark:text-lime-200 min-[380px]:text-lg sm:text-xl">
             SocialHands
           </span>
         </Link>
@@ -148,13 +148,13 @@ const Navbar = () => {
             aria-label="Toggle dark mode"
             title="Toggle dark mode"
             onClick={toggleTheme}
-            className="h-10 w-10 rounded-full border-black/10 bg-white/70 text-[#42512C] shadow-sm hover:bg-white hover:text-[#1C2012] dark:border-white/15 dark:bg-white/10 dark:text-lime-200 dark:hover:bg-white/15 dark:hover:text-white"
+            className="h-11 w-11 rounded-full border-black/10 bg-white/70 text-[#42512C] shadow-sm hover:bg-white hover:text-[#1C2012] dark:border-white/15 dark:bg-white/10 dark:text-lime-200 dark:hover:bg-white/15 dark:hover:text-white sm:h-10 sm:w-10"
           >
             <Moon size={20} aria-hidden="true" className="dark:hidden" />
             <Sun size={20} aria-hidden="true" className="hidden dark:block" />
           </Button>
           {!hasMounted ? (
-            <div aria-hidden="true" className="h-10 w-10" />
+            <div aria-hidden="true" className="h-11 w-11 sm:h-10 sm:w-10" />
           ) : user ? (
             <Popover>
               <PopoverTrigger
@@ -246,7 +246,7 @@ const Navbar = () => {
             </Popover>
           ) : (
             <Link href="/sign-in">
-              <Button className="h-10 rounded-full bg-[#26351F] px-5 font-semibold text-white shadow-md shadow-green-900/20 hover:bg-green-900">
+              <Button className="h-11 rounded-full bg-[#26351F] px-3 font-semibold text-white shadow-md shadow-green-900/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/15 sm:h-10 sm:px-5">
                 <LogIn size={18} aria-hidden="true" />
                 <span className="hidden sm:inline">Login</span>
               </Button>

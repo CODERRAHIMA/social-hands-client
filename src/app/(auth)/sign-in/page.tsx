@@ -75,7 +75,7 @@ export default function SignInPage() {
   }
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#F7F6F1] px-4 pb-16 pt-28 dark:bg-[#071E07] sm:px-6 sm:pt-32">
+    <section className="relative isolate overflow-hidden bg-[#F7F6F1] px-3 pb-12 pt-24 dark:bg-[#071E07] min-[380px]:px-4 sm:px-6 sm:pb-16 sm:pt-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-32 top-28 -z-10 size-80 rounded-full bg-[#647F52]/12 blur-3xl dark:bg-lime-300/8"
@@ -85,23 +85,23 @@ export default function SignInPage() {
         className="pointer-events-none absolute -right-32 bottom-8 -z-10 size-96 rounded-full bg-[#D9CBA7]/20 blur-3xl dark:bg-lime-300/6"
       />
 
-      <div className="mx-auto grid max-w-6xl overflow-hidden rounded-[2rem] border border-[#E5E9DF] bg-white shadow-[0_28px_90px_-40px_rgba(37,49,29,0.35)] dark:border-white/10 dark:bg-[#102110] dark:shadow-black/30 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="flex items-center justify-center px-6 py-10 sm:px-10 sm:py-12 lg:px-14">
+      <div className="mx-auto grid max-w-6xl overflow-hidden rounded-2xl border border-[#E5E9DF] bg-white shadow-[0_28px_90px_-40px_rgba(37,49,29,0.35)] dark:border-white/10 dark:bg-[#102110] dark:shadow-black/30 sm:rounded-[2rem] lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="flex items-center justify-center px-4 py-8 min-[380px]:px-6 sm:px-10 sm:py-12 lg:px-14">
           <div className="w-full max-w-md">
             <div className="mb-8">
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#647F52] dark:text-lime-300">
                 Good to have you back
               </p>
-              <h1 className="text-3xl font-extrabold tracking-tight text-[#1C2012] dark:text-stone-100 sm:text-4xl">
+              <h1 className="text-2xl font-extrabold tracking-tight text-[#1C2012] dark:text-stone-100 sm:text-4xl">
                 Welcome back
               </h1>
-              <p className="mt-3 text-base leading-7 text-[#64695D] dark:text-stone-400">
+              <p className="mt-3 text-sm leading-6 text-[#64695D] dark:text-stone-400 sm:text-base sm:leading-7">
                 Sign in to find your next way to make a difference.
               </p>
             </div>
 
             <form onSubmit={handleEmailSignIn}>
-              <FieldGroup className="gap-5">
+              <FieldGroup className="gap-4 sm:gap-5">
                 <Field>
                   <FieldLabel
                     htmlFor="email"
@@ -163,7 +163,7 @@ export default function SignInPage() {
                   <Button
                     type="submit"
                     disabled={pending !== null}
-                    className="h-12 w-full rounded-xl bg-[#42512C] text-sm font-bold text-white shadow-lg shadow-[#42512C]/20 hover:bg-[#344223] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200"
+                    className="h-11 w-full rounded-xl bg-[#42512C] text-sm font-bold text-white shadow-lg shadow-[#42512C]/20 hover:bg-[#344223] dark:bg-lime-300 dark:text-[#172313] dark:hover:bg-lime-200 sm:h-12"
                   >
                     {pending === "email" ? "Signing in..." : "Sign in"}
                     {pending !== "email" && (
@@ -187,7 +187,7 @@ export default function SignInPage() {
               variant="outline"
               disabled={pending !== null}
               onClick={handleGoogleSignIn}
-              className="cursor-pointer h-12 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2] dark:border-white/10 dark:bg-white/5 dark:text-stone-200 dark:hover:bg-white/10"
+              className="cursor-pointer h-11 w-full rounded-xl border-[#DDE0D5] bg-white text-sm font-semibold text-[#343A2D] hover:bg-[#F9F9F2] dark:border-white/10 dark:bg-white/5 dark:text-stone-200 dark:hover:bg-white/10 sm:h-12"
             >
 
                 

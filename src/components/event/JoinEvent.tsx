@@ -45,7 +45,7 @@ const JoinEvent = ({ event }: { event: IEvent }) => {
   return (
     <Button
       onClick={handleJoinEvent}
-      className={`cursor-pointer h-11 flex-1 rounded-xl px-5 font-semibold shadow-md transition-all hover:-translate-y-0.5 focus-visible:ring-offset-2 sm:flex-none ${
+      className={`h-11 min-w-0 flex-1 whitespace-normal rounded-xl px-2 text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5 focus-visible:ring-offset-2 min-[380px]:px-3 min-[380px]:text-sm sm:flex-none sm:px-5 ${
         isJoined
           ? "bg-[#647F52] text-white shadow-[#42512C]/15 hover:bg-[#526942] dark:bg-[#263b21] dark:text-lime-200 dark:hover:bg-[#31492b]"
           : "bg-[#42512C] text-white shadow-[#42512C]/20 hover:bg-[#344222] dark:bg-lime-300 dark:text-[#172313] dark:shadow-lime-300/10 dark:hover:bg-lime-200"

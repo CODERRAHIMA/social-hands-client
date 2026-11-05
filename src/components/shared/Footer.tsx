@@ -5,16 +5,16 @@ import { Calendar, Sparkles, MapPin, Globe } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="relative overflow-hidden border-t border-[#42512C]/10 bg-[#F7F6F1] text-[#26351f] dark:border-white/10 dark:bg-[#071E07] dark:text-stone-100">
-      <div className="relative mx-auto max-w-7xl px-6 pb-6 pt-14 sm:px-10 lg:px-12">
+      <div className="relative mx-auto max-w-7xl px-4 pb-6 pt-10 sm:px-10 sm:pt-14 lg:px-12">
         
         {/* Main Grid Content formatted like the image */}
-        <div className="grid gap-12 border-b border-[#42512C]/10 pb-12 dark:border-white/10 md:grid-cols-[1.4fr_1fr_1.1fr_1.1fr] md:gap-10">
+        <div className="grid gap-8 border-b border-[#42512C]/10 pb-8 dark:border-white/10 sm:grid-cols-2 sm:gap-8 sm:pb-10 lg:grid-cols-[1.4fr_1fr_1.1fr_1.1fr] lg:gap-10 lg:pb-12">
           
           {/* Column 1: Original Brand Identity */}
           <div className="flex flex-col items-start">
             <Link href="/#home" className="inline-flex items-center gap-3 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-[#647F52]">
-              <Image src="/shlogo.jpg" alt="" width={44} height={44} className="h-11 w-11 rounded-full object-cover" />
-              <span className="text-xl font-extrabold tracking-tight text-[#26351F] dark:text-stone-100">
+              <Image src="/shlogo.jpg" alt="" width={44} height={44} className="h-9 w-9 rounded-full object-cover sm:h-11 sm:w-11" />
+              <span className="text-lg font-extrabold tracking-tight text-[#26351F] dark:text-stone-100 sm:text-xl">
                 SocialHands
               </span>
             </Link>

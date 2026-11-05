@@ -44,35 +44,41 @@ const BannerPage = () => {
       dark:bg-lime-200/10
         sm:right-[8%] sm:h-96 sm:w-96"
       />
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-36 sm:px-10 lg:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-32 sm:px-10 sm:py-36 lg:px-12">
         <div className="max-w-3xl">
-          <div className="mb-7 inline-flex max-w-full items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-xs font-semibold tracking-wide text-white shadow-lg shadow-black/10 backdrop-blur-xl sm:text-sm">
+          <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-[11px] font-semibold tracking-wide text-white shadow-lg shadow-black/10 backdrop-blur-xl sm:mb-7 sm:gap-2.5 sm:px-4 sm:py-2.5 sm:text-sm">
             <Sprout size={16} aria-hidden="true" className="text-lime-200" />
             <span>Community-Driven Social Development Platform</span>
           </div>
 
-          <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-lime-200 sm:text-sm">
+          <p className="mb-5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-lime-200 sm:gap-3 sm:text-sm sm:tracking-[0.24em]">
             <span aria-hidden="true" className="h-px w-8 bg-lime-200" />
             Together, we can make a difference
           </p>
-          <h1 className="text-5xl font-extrabold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
+          <h1 className="text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] min-[380px]:text-5xl sm:text-6xl lg:text-7xl">
             Lend a hand.
             <br />
             <span className="text-lime-200">Change a life.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
+          <p className="mt-5 max-w-xl text-sm leading-6 text-white/80 sm:mt-6 sm:text-lg sm:leading-8">
             Bring your time, skills, and heart to the causes that make our
             communities stronger.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
-            <Link href="/upcoming-events">
-              <Button className="h-12 rounded-full bg-lime-200 px-6 text-sm font-bold text-[#1d2919] shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-lime-100 sm:text-base">
+          <div className="mt-8 flex flex-row items-center gap-2 sm:mt-10 sm:gap-4">
+            <Link
+              href="/upcoming-events"
+              className="min-w-0 flex-1 sm:flex-none"
+            >
+              <Button className="h-11 w-full whitespace-nowrap rounded-full bg-lime-200 px-2 text-xs font-bold text-[#1d2919] shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-lime-100 sm:h-12 sm:w-auto sm:px-6 sm:text-base">
                 Explore Upcoming Events
-                <ArrowRight aria-hidden="true" className="ml-1 size-4" />
+                <ArrowRight
+                  aria-hidden="true"
+                  className="hidden sm:block ml-1 size-3.5 shrink-0 sm:size-4"
+                />
               </Button>
             </Link>
-            
+
             <CreateEventButton />
           </div>
         </div>
