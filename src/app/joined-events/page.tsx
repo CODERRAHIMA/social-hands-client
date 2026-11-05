@@ -3,14 +3,24 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { IEvent } from "@/lib/eventType";
 import MyEventCard from "@/components/shared/MyEventCard";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
 const JoinedEventsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
   const user = session?.user;
-  const res = await fetch(`http://localhost:8000/joined-events/${user?.email}`);
+
+  const token = await getTokenFromServer();
+
+  const res = await fetch(
+    `http://localhost:8000/joined-events/${user?.email}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
+  );
   const events = await res.json();
 
   return (
@@ -40,7 +50,7 @@ const JoinedEventsPage = async () => {
         <div className="grid gap-4">
           {events.map((event: IEvent) => (
             <div key={event._id} className="h-full">
-              <MyEventCard event={event}/>
+              <MyEventCard event={event} />
             </div>
           ))}
         </div>

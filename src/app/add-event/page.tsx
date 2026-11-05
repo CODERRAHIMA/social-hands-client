@@ -16,6 +16,7 @@ import {
   PlusCircle,
   ChevronDown,
 } from "lucide-react";
+import { getTokenFromClient } from "@/lib/getTokenfromClient";
 
 const formProps = {
     title: "",
@@ -67,21 +68,14 @@ const CreateEventPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (formData.eventDate < getMinEventDate()) {
-      const dateInput = e.currentTarget.elements.namedItem("eventDate");
-      if (dateInput instanceof HTMLInputElement) {
-        dateInput.setCustomValidity("Please select a future date.");
-        dateInput.reportValidity();
-        dateInput.setCustomValidity("");
-      }
-      return;
-    }
+    const token = await getTokenFromClient();
 
     try {
       const res = await fetch("http://localhost:8000/add-event", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`
         },
         body: JSON.stringify({ ...formData, creatorEmail: userEmail }),
       });

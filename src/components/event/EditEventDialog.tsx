@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,6 +25,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { getTokenFromClient } from "@/lib/getTokenfromClient";
 
 const getMinEventDate = () => {
   const minDate = new Date();
@@ -55,23 +58,17 @@ export function EditEventDialog({ event }: { event: IEvent }) {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formData.eventDate < getMinEventDate()) {
-      const dateInput = e.currentTarget.elements.namedItem("eventDate");
-      if (dateInput instanceof HTMLInputElement) {
-        dateInput.setCustomValidity("Please select a future date.");
-        dateInput.reportValidity();
-        dateInput.setCustomValidity("");
-      }
-      return;
-    }
 
     const {_id, ...updatedEvent} = formData; // Exclude _id from the updated data
+
+    const token = await getTokenFromClient();
 
     try {
       const res = await fetch(`http://localhost:8000/upcoming-events/${event._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`
         },
         body: JSON.stringify(updatedEvent),
       });

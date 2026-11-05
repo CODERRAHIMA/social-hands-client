@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,24 +15,29 @@ import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
+import { getTokenFromClient } from "@/lib/getTokenfromClient";
 
-export function DeleteEventDialog({id}: {id: string}) {
-    const handleDeleteEvent = async () => {
-        try {
-            const res = await fetch(`http://localhost:8000/upcoming-events/${id}`, {
-                method: "DELETE"
-            })
-            if (!res.ok) {
-                toast.error("Unable to delete the event. Please try again.");
-                return;
-            }
-            toast.success("Event deleted successfully.");
-        } catch {
-            toast.error("Unable to delete the event. Please try again.");
-            return;
-        }
-        redirect("/manage-events");
-    };
+export function DeleteEventDialog({ id }: { id: string }) {
+  const handleDeleteEvent = async () => {
+    const token = await getTokenFromClient();
+    try {
+      const res = await fetch(`http://localhost:8000/upcoming-events/${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) {
+        toast.error("Unable to delete the event. Please try again.");
+        return;
+      }
+      toast.success("Event deleted successfully.");
+    } catch {
+      toast.error("Unable to delete the event. Please try again.");
+      return;
+    }
+    redirect("/manage-events");
+  };
 
   return (
     <AlertDialog>

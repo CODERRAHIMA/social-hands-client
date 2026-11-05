@@ -62,29 +62,14 @@ const stories: Story[] = [
     lg: "row-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+    src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80",
     alt: "Volunteers sharing stories with older residents",
     title: "Seniors and their stories",
     author: "Grace · companion visits",
     base: "row-span-2",
     lg: "row-span-2",
   },
-  {
-    src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c",
-    alt: "Community members celebrating a completed project",
-    title: "The class of 2025 graduates",
-    author: "42 students · one season",
-    base: "",
-    lg: "col-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1497375638960-ca368c7231e4",
-    alt: "Two volunteers reaching out a helping hand",
-    title: "One more hand",
-    author: "Sam · new volunteer",
-    base: "col-span-2",
-    lg: "",
-  },
+  
 ];
 
 const StoriesGallery = () => {
@@ -104,17 +89,6 @@ const StoriesGallery = () => {
               the people who made it happen.
             </p>
           </div>
-
-          <a
-            href="/stories"
-            className="group inline-flex items-center gap-2 self-start rounded-full border border-[#42512C]/20 px-5 py-2.5 text-sm font-semibold text-[#42512C] transition-colors hover:bg-[#42512C] hover:text-white lg:self-auto"
-          >
-            Share your story
-            <ArrowUpRight
-              aria-hidden="true"
-              className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </a>
         </div>
 
         <ul className="mt-12 grid auto-rows-[140px] grid-flow-dense grid-cols-2 gap-3 sm:auto-rows-[160px] sm:gap-4 lg:auto-rows-[170px] lg:grid-cols-3">
