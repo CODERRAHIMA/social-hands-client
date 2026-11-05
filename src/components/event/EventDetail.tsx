@@ -65,7 +65,7 @@ const EventDetailPage = ({ event }: { event: IEvent }) => {
 
             {/* Event Title */}
             <div className="absolute bottom-5 left-4 right-4 text-white sm:bottom-8 sm:left-8 sm:right-8">
-              <h1 className="mb-3 max-w-4xl break-words text-2xl font-extrabold leading-tight tracking-tight min-[380px]:text-3xl sm:mb-4 sm:text-4xl md:text-5xl">
+              <h1 className="mb-3 max-w-4xl break-words text-2xl font-extrabold leading-tight tracking-tight min-[380px]:text-2xl sm:mb-4 sm:text-4xl md:text-5xl">
                 {event.title}
               </h1>
 
